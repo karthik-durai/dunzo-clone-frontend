@@ -1,13 +1,13 @@
 <template>
   <div>
     <h1>Dunzo-Clone</h1>
-    <p @click="getLoginURL">click</p>
-    <p>{{ userLoginURL }}</p>
+    <a :href="userLoginURL">sign in with google</a>
   </div>
 </template>
 
 <script>
 export default {
+  name: 'login',
   data() {
     return {
       userLoginURL: null
@@ -15,8 +15,12 @@ export default {
   },
   methods: {
     async getLoginURL() {
-      this.userLoginURL = await fetch('http://localhost:8000/user/loginURL')
+      let fetchedURLObj = await fetch('http://localhost:8000/user/loginURL')
+      this.userLoginURL = (await fetchedURLObj.json()).url
     }
+  },
+  mounted() {
+    this.getLoginURL()
   }
 }
 </script>
