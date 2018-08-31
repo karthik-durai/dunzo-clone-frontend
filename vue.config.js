@@ -1,10 +1,5 @@
 module.exports = {
   pages: {
-    message: {
-      entry: 'src/views/messages/success.js',
-      template: 'public/index.html',
-      title: 'Dunzo-Clone'
-    },
     userLogin: {
       entry: 'src/views/user/login/login.js',
       template: 'public/index.html',

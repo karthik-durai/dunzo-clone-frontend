@@ -1,9 +1,8 @@
 <template>
   <div>
     <router-link to="/">Place order</router-link>
-    <h3>your orders</h3>
     <ol>
-      <li></li>
+      <li v-for="order in orders">{{ order.description }}</li>
     </ol>
   </div>
 </template>
@@ -17,13 +16,17 @@ export default {
   },
   methods: {
     async getOrders() {
-      let fetched = await fetch('http://localhost:8000/user/getOrders')
-      let orders = await fetched.json()
-      return orders
+      try {
+        let fetched = await fetch('http://localhost:8000/user/getOrders')
+        let orders = await fetched.json()
+        return orders
+      } catch (err) {
+        return error
+      }
     }
   },
   async mounted() {
-    this.orders = await this.getOrders()
+    this.orders = (await this.getOrders()).message
     console.log(this.orders)
   }
 }
