@@ -1,12 +1,20 @@
 <template>
   <div>
-    <p>you shall place your orders</p>
+    <p>dunzo-clone</p>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
+import placeOrder from '../../../components/placeOrder.vue'
+import showOrders from '../../../components/showOrders.vue'
+
 export default {
-  name: 'orders'
+  name: 'orders',
+  components: {
+    placeOrder,
+    showOrders,
+  },
 }
 </script>
 

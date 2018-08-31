@@ -1,8 +1,8 @@
 import Vue from 'vue'
-import index from './index.vue'
+import success from './success.vue'
 
 Vue.config.productionTip = false
 
 new Vue({
-  render: h => h(index)
+  render: h => h(success)
 }).$mount('#app')
