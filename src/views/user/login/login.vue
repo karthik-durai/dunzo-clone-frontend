@@ -15,7 +15,7 @@ export default {
   },
   methods: {
     async getLoginURL() {
-      let fetchedURLObj = await fetch('http://localhost:8000/user/loginURL')
+      let fetchedURLObj = await fetch('http://localhost:8000/user/getLoginURL')
       this.userLoginURL = (await fetchedURLObj.json()).url
     }
   },
