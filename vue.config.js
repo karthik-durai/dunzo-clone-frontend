@@ -1,13 +1,14 @@
 module.exports = {
   pages: {
-    userLogin: {
-      entry: 'src/views/user/login/login.js',
+    index: {
+      entry: 'src/views/user/main.js',
       template: 'public/index.html',
-      title: 'login-Dunzo-Clone'
+      title: 'Dunzo-Clone'
     },
-    orders: {
-      entry: 'src/views/user/orders/orders.js',
-      title: 'orders-Dunzo-Clone'
+    runner: {
+      entry: 'src/views/runner/main.js',
+      template: 'public/index.html',
+      title: 'Dunzo-Clone'
     }
   }
 }
