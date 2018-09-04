@@ -1,10 +1,7 @@
 <template>
-  <div class="placeOrderForm">
+  <div>
     <user-menu />
-    <form action="">
-      <input type="text">
-      <button>place</button>
-    </form>
+    <p>your orders</p>
   </div>
 </template>
 
