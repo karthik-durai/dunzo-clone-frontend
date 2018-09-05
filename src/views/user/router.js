@@ -4,9 +4,10 @@ import login from '../../components/login/login.vue'
 import placeOrder from '../../components/order/placeOrder.vue'
 import showOrders from '../../components/order/showOrders.vue'
 import showOrderDetails from '../../components/order/showOrderDetails.vue'
-import showprofile from '../../components/profile/profile.vue'
+import userProfile from '../../components/profile/userProfile.vue'
 import userMenu from '../../components/menu/userMenu.vue'
 import about from '../../components/about/about.vue'
+import runnerInfo from '../../components/runner/runnerInfo.vue'
 
 Vue.use(Router)
 
@@ -51,8 +52,8 @@ export default new Router({
       ]
     },
     {
-      path: '/profile',
-      component: showprofile,
+      path: '/myProfile',
+      component: userProfile,
       children: [
         {
           path: 'menu',
@@ -63,6 +64,16 @@ export default new Router({
     {
       path: '/about',
       component: about,
+      children: [
+        {
+          path: 'menu',
+          component: userMenu
+        }
+      ]
+    },
+    {
+      path: '/showOrders/:id/runnerInfo',
+      component: runnerInfo,
       children: [
         {
           path: 'menu',

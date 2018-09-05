@@ -1,6 +1,6 @@
 <template>
   <div>
-    <router-link to='/profile/menu'>menu</router-link>
+    <router-link to='/myProfile/menu'>menu</router-link>
     <router-view/>
     <p>profile vue</p>
   </div>

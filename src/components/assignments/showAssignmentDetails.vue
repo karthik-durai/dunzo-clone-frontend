@@ -1,5 +1,5 @@
 <template>
-  <router-view/>
+  <p>assignment details</p>
 </template>
 
 <script>
