@@ -1,6 +1,7 @@
 <template>
   <div>
-    <user-menu />
+    <router-link to='/showOrders/menu'>menu</router-link>
+    <router-view/>
     <p>your orders</p>
   </div>
 </template>
