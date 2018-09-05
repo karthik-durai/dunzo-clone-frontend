@@ -11,24 +11,29 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Home',
+      redirect: '/placeOrder'
+    },
+    {
+      path: '/placeOrder',
       component: placeOrder
     },
     {
       path: '/login',
-      name: 'login',
       component: login
     },
     {
       path: '/showOrders',
-      name: 'showOrders',
       component: showOrders
     },
     {
       path: '/profile',
-      name: 'showProfile',
       component: showprofile
     }
+    // {
+    //   path: '/showOrderDetails',
+    //   name: 'showOrderDetails',
+    //   component: showOrderDetails
+    // }
     // {
     //   path: '/about',
     //   name: 'about',
