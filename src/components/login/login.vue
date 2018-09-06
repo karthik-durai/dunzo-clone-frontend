@@ -25,17 +25,15 @@ export default {
     async getLoginURL() {
       try {
         let fetchedObj =  await fetch('http://localhost:8000/user/getLoginURL')
-        let url = await fetchedObj.json()
-        console.log(url)
-        //  return url
+        let url = (await fetchedObj.json()).url
+        return url
       } catch (err) {
         return null
       }
     }
   },
-  mounted() {
-    this.loginURL = this.getLoginURL()
-    // console.log(this.loginURL)
+  async mounted() {
+    this.loginURL = await this.getLoginURL()
   },
   computed: {
     fetchingURL() {
