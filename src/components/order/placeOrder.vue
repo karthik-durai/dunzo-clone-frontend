@@ -41,7 +41,7 @@ export default {
        this.hasLessChars = false
        let statusObj = await fetch('http://localhost:8000/user/placeorder', this.constructBody())
        let status = (await statusObj.json()).status
-       determineStatusMessage(status)
+       this.determineStatusMessage(status)
      } else {
        this.hasLessChars = true
      }
@@ -59,7 +59,7 @@ export default {
       return {
         method: 'post',
         mode: 'cors',
-        header: {
+        headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({description: this.orderDescription})
