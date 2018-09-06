@@ -16,12 +16,10 @@
 </template>
 
 <script>
-import userMenu from '../menu/userMenu.vue'
 import information from '../status/placeOrderMessages/information.vue'
 
 export default {
   components: {
-    userMenu,
     information
   },
   data() {
@@ -31,22 +29,24 @@ export default {
       hasLessChars: false,
       hasFailedToPlace: false,
       hasInvalidChars: false,
-      hasPlaced: false
+      hasPlaced: false,
+      postOrderUrl: 'http://localhost:8000/user/placeorder'
     }
   },
   methods: {
     async placeOrder () {
       try{
-     if (!this.checkIfLessChars()) {
-       this.hasLessChars = false
-       let statusObj = await fetch('http://localhost:8000/user/placeorder', this.constructBody())
-       let status = (await statusObj.json()).status
-       this.determineStatusMessage(status)
-     } else {
-       this.hasLessChars = true
-     }
+        if (!this.checkIfLessChars()) {
+          this.hasLessChars = false
+          let status = (await 
+            (await fetch(this.postOrderUrl, this.constructBodyToPost()))
+            .json()).status
+          this.determineStatusMessage(status)
+        } else {
+          this.hasLessChars = true
+        }
       } catch (err) {
-        this.hasFailedToPlace = true
+          this.hasFailedToPlace = true
       }
     },
     checkIfLessChars () {
@@ -55,7 +55,7 @@ export default {
     checkIfInvalidChars () {
       return false
     },
-    constructBody () {
+    constructBodyToPost () {
       return {
         method: 'post',
         mode: 'cors',
