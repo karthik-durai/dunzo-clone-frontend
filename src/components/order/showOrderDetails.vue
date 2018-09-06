@@ -12,7 +12,8 @@ import vueInstance from '../../views/user/main.js'
 export default {
   data() {
     return {
-      orderDetails: null
+      orderDetails: null,
+      orderDetailsUrl: 'http://localhost:8000/user/getOrderDetails?orderID='
     }
   },
   computed: {
@@ -20,16 +21,21 @@ export default {
       return `/showOrders/${ vueInstance.$route.params.id }/menu`
     },
     getOrderDetailsUrl() {
-      return `http://localhost:8000/user/getOrderDetails?orderID=${vueInstance.$route.params.id}`
+      return `${this.orderDetailsUrl}${vueInstance.$route.params.id}`
     }
   },
   methods: {
     async getOrderDetails (url) {
-      return (await (await fetch(url)).json()).details
+      try {
+        return (await (await fetch(url)).json()).details
+      } catch(e) {
+        console.log('error', e)
+      }
     }
   },
   async mounted() {
     this.orderDetails = await this.getOrderDetails(this.getOrderDetailsUrl)
+    console.log(this.orderDetails)
   }
 }
 </script>

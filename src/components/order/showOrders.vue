@@ -4,16 +4,21 @@
     <router-view/>
     <ol>
       <li v-for="order of orders">
-        <p>{{ order }}</p>
+        <render-order
+        v-bind:order="order"
+        v-on:getdetails="changeRoute"/>
       </li>
     </ol>
   </div>
 </template>
 
 <script>
+import renderOrder from './renderOrder.vue'
+import vueInstance from '../../views/user/main.js'
+
 export default {
   components: {
-
+    renderOrder
   },
   data() {
     return {
@@ -28,6 +33,9 @@ export default {
     async getOrders (url) {
       let orders = (await (await fetch(url)).json())
       return orders.message
+    },
+    changeRoute(orderId) {
+      vueInstance.$router.push({ path: `${vueInstance.$route.path}/${orderId}` })
     }
   }
 }
