@@ -2,17 +2,24 @@
   <div>
     <router-link v-bind:to="menuRoute">menu</router-link>
     <router-view/>
-    <p>{{ orderDetails }}</p>
+    <list-order-details
+      v-bind:order="orderDetails"/>
+    <div id="map">
+    </div>
   </div>
 </template>
 
 <script>
 import vueInstance from '../../views/user/main.js'
+import listOrderDetails from './listOrderDetails.vue'
 
 export default {
+  components: {
+    listOrderDetails
+  },
   data() {
     return {
-      orderDetails: null,
+      orderDetails: {},
       orderDetailsUrl: 'http://localhost:8000/user/getOrderDetails?orderID='
     }
   },

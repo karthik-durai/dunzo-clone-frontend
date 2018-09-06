@@ -4,7 +4,7 @@
     <router-view/>
     <ol>
       <li v-for="order of orders">
-        <render-order
+        <orderList
         v-bind:order="order"
         v-on:getdetails="changeRoute"/>
       </li>
@@ -13,12 +13,12 @@
 </template>
 
 <script>
-import renderOrder from './renderOrder.vue'
+import orderList from './orderList.vue'
 import vueInstance from '../../views/user/main.js'
 
 export default {
   components: {
-    renderOrder
+    orderList
   },
   data() {
     return {
