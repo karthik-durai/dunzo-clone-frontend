@@ -2,7 +2,7 @@
   <div>
     <router-link v-bind:to="menuRoute">menu</router-link>
     <router-view/>
-    <p>Order details page</p>
+    <p>{{ orderDetails }}</p>
   </div>
 </template>
 
