@@ -1,21 +1,26 @@
 <template>
-  <div>
+  <div class="order-details">
     <div class="menu">
       <router-link v-bind:to="menuRoute" class="menu__button">&#9776;</router-link>
       <router-view/>
     </div>
     <list-order-details
-      v-bind:order="orderDetails"/>
+      v-bind:order="orderDetails"
+      class="each-order"/>
+    <track-runner
+      class="tracker-map"/>
   </div>
 </template>
 
 <script>
 import vueInstance from '../../views/user/main.js'
 import listOrderDetails from './listOrderDetails.vue'
+import trackRunner from '../runner/trackRunner.vue'
 
 export default {
   components: {
-    listOrderDetails
+    listOrderDetails,
+    trackRunner
   },
   data() {
     return {
@@ -47,5 +52,20 @@ export default {
 </script>
 
 <style>
+.order-details {
+  height: inherit;
+  display: flex;
+  flex-direction: column;
+}
+
+.each-order {
+  flex: 1;
+}
+
+.tracker-map {
+  width: inherit;
+  height: inherit;
+  flex: 2;
+}
 
 </style>

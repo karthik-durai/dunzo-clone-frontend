@@ -1,6 +1,5 @@
 <template>
   <div id="map">
-
   </div>
 </template>
 
@@ -14,8 +13,14 @@ export default {
     }
   },
   methods: {
+    initMap () {
+      this.map = new window.google.maps.Map(document.getElementById('map'), 
+      {center: this.latAndLng, zoom: 6 })
+      window.map = this.map
+    }
   },
   mounted() {
+    this.initMap()
   }
 }
 </script>
