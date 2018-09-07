@@ -4,10 +4,10 @@
       <router-link to='/myProfile/menu' class="menu__button">&#9776;</router-link>
       <router-view/>
     </div>
-    <div>
-      <img v-bind:src="profile.profilePicture" alt="pic">
-      <p>{{ profile.name }}</p>
-      <p>{{ profile.emailID }}</p>
+    <div class="profile">
+      <img v-bind:src="profile.profilePicture" alt="pic" class="profile__pic">
+      <p class="profile__name">{{ profile.name }}</p>
+      <p class="profile__emailID">{{ profile.emailID }}</p>
     </div>
   </div>
 </template>
@@ -37,5 +37,15 @@ export default {
 </script>
 
 <style>
+.profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 1em;
+}
+
+.profile__pic {
+  width: 50px;
+}
 
 </style>
