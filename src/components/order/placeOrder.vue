@@ -90,4 +90,11 @@ export default {
   text-decoration: none;
   font-size: 2em;
 }
+.place-order-form {
+  margin: 1em;
+  display: flex;
+}
+.place-order-form__input {
+  flex: 1;
+}
 </style>
