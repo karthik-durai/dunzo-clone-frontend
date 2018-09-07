@@ -1,10 +1,13 @@
 <template>
-  <div>
-    <h1>Dunzo-Clone</h1>
+  <div class="login-component">
+    <div class="heading">
+      <h1 class="heading__h1">Dunzo-Clone</h1>
+    </div>
     <p v-if="fetchingURL">loading</p>
     <signin-button
       v-else
       v-bind:loginURL="loginURL"
+      class="signin-button-block"
     />
   </div>
 </template>
@@ -44,5 +47,26 @@ export default {
 </script>
 
 <style>
+.login-component {
+  display: flex;
+  height: inherit;
+  margin: 0.5em 0.5em;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.heading {
+  margin: 0;
+  height: 10vh;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  display: flex;
+}
+
+.heading__h1 {
+  font-family: Helvetica, sans-serif;
+  font-weight: 200;
+}
 
 </style>

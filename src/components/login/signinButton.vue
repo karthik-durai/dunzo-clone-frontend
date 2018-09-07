@@ -1,10 +1,9 @@
 <template>
   <div class="signin-button">
-    <a v-bind:href="loginURL">
-      <img src="../../assets/btn_google_light_normal_ios.svg" 
-            alt="G"
+    <a v-bind:href="loginURL" class="signin-button__link">
+      <img src="../../assets/btn_google_signin_light_normal_web@2x.png" 
+            alt="sign in with google"
             class="signin-button__g-image">
-      <span class ="signin-button__link-text">Sign in with Google</span>
     </a>
   </div>
 </template>
@@ -18,14 +17,17 @@ export default {
 
 <style scoped>
   .signin-button {
-    border: solid;
-    display: grid;
+    flex: 1;
+    height: 10vh;
   }
-  .signin-button__link-text {
-    border: solid;
-    display: inline-flex;
+  .signin-button__link {
+    display: block;
   }
   .signin-button__g-image {
-    border: solid;
+    width: 80%;
+    margin: 0 auto;
+    display: block;
+    box-shadow: 1px 1px 3px black;
+    padding: 0;
   }
 </style>
