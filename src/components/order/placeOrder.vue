@@ -1,10 +1,13 @@
 <template>
   <div class="placeOrderForm">
-    <router-link to='/placeOrder/menu'>menu</router-link>
-    <router-view/>
-    <form action="">
-      <input type="text" v-model="orderDescription" v-bind:placeholder="placeholder">
-      <button @click="placeOrder">place</button>
+    <div class="menu">
+      <router-link to='/placeOrder/menu' class="menu__button">&#9776;</router-link>
+      <router-view/>
+    </div>
+    <form action="" class="place-order-form">
+      <input type="text" v-model="orderDescription" v-bind:placeholder="placeholder"
+        class="place-order-form__input">
+      <button @click="placeOrder" class="place-order-form__submit">place</button>
     </form>
     <information
       v-bind:lessChars = "hasLessChars"
@@ -79,5 +82,12 @@ export default {
 </script>
 
 <style>
-
+.menu {
+  border: solid;
+  background-color: #070201;
+}
+.menu__button {
+  text-decoration: none;
+  font-size: 2em;
+}
 </style>

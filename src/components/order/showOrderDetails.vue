@@ -1,11 +1,11 @@
 <template>
   <div>
-    <router-link v-bind:to="menuRoute">menu</router-link>
-    <router-view/>
+    <div class="menu">
+      <router-link v-bind:to="menuRoute" class="menu__button">&#9776;</router-link>
+      <router-view/>
+    </div>
     <list-order-details
       v-bind:order="orderDetails"/>
-    <div id="map">
-    </div>
   </div>
 </template>
 

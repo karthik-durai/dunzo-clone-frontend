@@ -1,7 +1,9 @@
 <template>
   <div>
-    <router-link to='/showOrders/menu'>menu</router-link>
-    <router-view/>
+    <div class="menu">
+      <router-link to='/showOrders/menu' class="menu__button">&#9776;</router-link>
+      <router-view/>
+    </div>
     <ol>
       <li v-for="order of orders">
         <orderList
