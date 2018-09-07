@@ -42,7 +42,6 @@ export default {
   },
   async mounted() {
     this.orderDetails = await this.getOrderDetails(this.getOrderDetailsUrl)
-    console.log(this.orderDetails)
   }
 }
 </script>
