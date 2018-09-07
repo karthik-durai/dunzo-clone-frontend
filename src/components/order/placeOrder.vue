@@ -4,11 +4,11 @@
       <router-link to='/placeOrder/menu' class="menu__button">&#9776;</router-link>
       <router-view/>
     </div>
-    <form action="" class="place-order-form">
+    <div class="place-order-form">
       <input type="text" v-model="orderDescription" v-bind:placeholder="placeholder"
         class="place-order-form__input">
       <button @click="placeOrder" class="place-order-form__submit">place</button>
-    </form>
+    </div>
     <information
       v-bind:lessChars = "hasLessChars"
       v-bind:failedToPlace = "hasFailedToPlace"
