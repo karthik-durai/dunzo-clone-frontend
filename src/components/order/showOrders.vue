@@ -33,11 +33,18 @@ export default {
   },
   methods: {
     async getOrders (url) {
-      let orders = (await (await fetch(url)).json())
+      let orders = (await (await fetch(url, this.constructBodyToFetch())).json())
       return orders.message
     },
     changeRoute(orderId) {
       vueInstance.$router.push({ path: `${vueInstance.$route.path}/${orderId}` })
+    },
+    constructBodyToFetch() {
+      return {
+        headers: {
+          'Authorization': document.cookie.split(';')[1].split('=')[1]
+        }
+      }
     }
   }
 }

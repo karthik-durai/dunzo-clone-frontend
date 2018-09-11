@@ -1,5 +1,8 @@
 <template>
-  <div id="map">
+  <div>
+    <input type="number" v-model="lat">
+    <div id="map" ref="map">
+    </div>
   </div>
 </template>
 
@@ -8,27 +11,44 @@ export default {
   data() {
     return {
       map: '',
-      infoWindow: '',
-      latAndLng: {lat: -34.397, lng: 150.644}
+      // latAndLng: {lat: 12.9608311, lng: 76.64365539999994},
+      lat: 12.9608311,
+      lng: 76.64365539999994,
+      marker: ''
     }
   },
   methods: {
-    initMap () {
-      this.map = new window.google.maps.Map(document.getElementById('map'), 
-      {center: this.latAndLng, zoom: 6 })
-      navigator.geolocation.getCurrentPosition(this.currentPosition)
+    renderMap () {
+      this.map = new google.maps.Map(this.$refs.map, 
+      {center: { lat: this.lat, lng: this.lng }, zoom: 13})
     },
-    currentPosition (position) {
-      let pos = { lat: position.coords.latitude, lng: position.coords.longitude }
-      this.map.setCenter(pos)
-    },
+    putMarker () {
+      this.marker = new google.maps.Marker({
+        map: this.map,
+        position: { lat: parseFloat(this.lat), lng: this.lng },
+        optimized: false
+      })
+    }
+  },
+  watch: {
+    lat() {
+      console.log(parseFloat(this.lat))
+      this.marker.setMap(null)
+      this.map.setCenter({ lat: parseFloat(this.lat), lng: this.lng })
+      this.putMarker()
+    }
   },
   mounted() {
-    this.initMap()
+    this.renderMap()
+    this.putMarker()
   }
 }
 </script>
 
 <style>
+#map {
+  width: 500px;
+  height: 500px;
+}
 
 </style>

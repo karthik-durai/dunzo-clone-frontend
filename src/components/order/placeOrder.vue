@@ -8,8 +8,14 @@
       <input type="text" v-model="orderDescription" 
         v-bind:placeholder="descriptionPlaceholder"
         class="place-order-form__description">
-        <location-suggestion 
-          v-bind:placeholder="fromAddressPlaceholder"/>
+        <div>
+          <from-location-suggestion 
+            v-bind:placeholder="fromAddressPlaceholder"/>
+        </div>
+        <div>
+          <to-location-suggestion 
+            v-bind:placeholder="toAddressPlaceholder"/>
+        </div>
       <button @click="placeOrder" class="place-order-form__submit">place</button>
     </div>
     <information
@@ -23,12 +29,14 @@
 
 <script>
 import information from '../status/placeOrderMessages/information.vue'
-import locationSuggestion from '../location/locationSuggestion.vue'
+import fromLocationSuggestion from '../location/locationSuggestion.vue'
+import toLocationSuggestion from '../location/locationSuggestion.vue'
 
 export default {
   components: {
     information,
-    locationSuggestion
+    fromLocationSuggestion,
+    toLocationSuggestion
   },
   data() {
     return {
@@ -82,6 +90,7 @@ export default {
       if (status) {
         this.hasPlaced = true
         this.hasFailedToPlace = false
+        // ChIJnQ6LHgUUrjsRnE_kgP4CRGU
       } else {
         this.hasFailedToPlace = true
         this.hasPlaced = false

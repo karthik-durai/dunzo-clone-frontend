@@ -39,9 +39,16 @@ export default {
   methods: {
     async getOrderDetails (url) {
       try {
-        return (await (await fetch(url)).json()).details
+        return (await (await fetch(url, this.constructBodyToFetch())).json()).details
       } catch(e) {
         console.log('error', e)
+      }
+    },
+    constructBodyToFetch() {
+      return {
+        headers: {
+          'Authorization': document.cookie.split(';')[1].split('=')[1]
+        }
       }
     }
   },
@@ -62,10 +69,12 @@ export default {
   flex: 1;
 }
 
-.tracker-map {
-  width: inherit;
-  height: inherit;
+.tracker-map>div {
+  width: 300px;
+  height: 300px;
   flex: 2;
+  border: solid;
+  position: relative
 }
 
 </style>
