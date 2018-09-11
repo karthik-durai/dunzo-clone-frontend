@@ -1,12 +1,15 @@
 <template>
-  <div class="placeOrderForm">
+  <div>
     <div class="menu">
       <router-link to='/placeOrder/menu' class="menu__button">&#9776;</router-link>
       <router-view/>
     </div>
     <div class="place-order-form">
-      <input type="text" v-model="orderDescription" v-bind:placeholder="placeholder"
-        class="place-order-form__input">
+      <input type="text" v-model="orderDescription" 
+        v-bind:placeholder="descriptionPlaceholder"
+        class="place-order-form__description">
+        <location-suggestion 
+          v-bind:placeholder="fromAddressPlaceholder"/>
       <button @click="placeOrder" class="place-order-form__submit">place</button>
     </div>
     <information
@@ -20,20 +23,26 @@
 
 <script>
 import information from '../status/placeOrderMessages/information.vue'
+import locationSuggestion from '../location/locationSuggestion.vue'
 
 export default {
   components: {
-    information
+    information,
+    locationSuggestion
   },
   data() {
     return {
       orderDescription: '',
-      placeholder: 'Type your order and click place',
+      descriptionPlaceholder: 'Type your order and click place',
+      fromAddressPlaceholder: 'Pick up address',
+      toAddressPlaceholder: 'Drop address',
       hasLessChars: false,
       hasFailedToPlace: false,
       hasInvalidChars: false,
       hasPlaced: false,
-      postOrderUrl: 'http://localhost:8000/user/placeorder'
+      postOrderUrl: 'http://localhost:8000/user/placeorder',
+      latitude: 0,
+      longitude: 0
     }
   },
   methods: {
@@ -63,7 +72,8 @@ export default {
         method: 'post',
         mode: 'cors',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': document.cookie.split(';')[1].split('=')[1]
         },
         body: JSON.stringify({description: this.orderDescription})
       }
@@ -82,19 +92,4 @@ export default {
 </script>
 
 <style>
-.menu {
-  border: solid;
-  background-color: #070201;
-}
-.menu__button {
-  text-decoration: none;
-  font-size: 2em;
-}
-.place-order-form {
-  margin: 1em;
-  display: flex;
-}
-.place-order-form__input {
-  flex: 1;
-}
 </style>
