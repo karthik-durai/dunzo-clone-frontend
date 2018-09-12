@@ -9,7 +9,7 @@ import userMenu from '../../components/menu/userMenu.vue'
 import about from '../../components/about/about.vue'
 import runnerInfo from '../../components/runner/runnerInfo.vue'
 import addressForm from '../../components/location/addressForm.vue'
-import autoComplete from '../../components/location/autoComplete.vue'
+import searchLocation from '../../components/location/searchLocation.vue'
 
 Vue.use(Router)
 
@@ -35,16 +35,16 @@ export default new Router({
       component: addressForm
     },
     {
-      path: '/placeOrder/providePickUpAddress/autoComplete',
-      component: autoComplete
+      path: '/placeOrder/providePickUpAddress/searchLocation',
+      component: searchLocation
     },
     {
       path: '/placeOrder/provideDropAddress/addressForm',
       component: addressForm
     },
     {
-      path: '/placeOrder/provideDropAddress/autoComplete',
-      component: autoComplete
+      path: '/placeOrder/provideDropAddress/searchLocation',
+      component: searchLocation
     },
     {
       path: '/login',

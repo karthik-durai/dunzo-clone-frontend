@@ -4,8 +4,8 @@
     <select id="input-pick-up" v-model="inputType">
       <option value="">--Choose an option--</option>
       <option value="CurrentLocation">Current Location</option>
-      <option value="addressForm">Use Address Form</option>
-      <option value="autoComplete">Use AutoComplete</option>
+      <option value="addressForm">Address Form</option>
+      <option value="searchLocation">Search Location</option>
     </select>
   </div>
 </template>
