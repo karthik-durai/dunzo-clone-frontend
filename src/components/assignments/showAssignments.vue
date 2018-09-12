@@ -7,8 +7,11 @@
 </template>
 
 <script>
+import runnerMenu from '../menu/runnerMenu.vue'
 export default {
-
+  components: {
+    runnerMenu
+  }
 }
 </script>
 

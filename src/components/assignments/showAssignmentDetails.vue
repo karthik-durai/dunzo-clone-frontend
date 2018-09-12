@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import vueInstance from '../../views/user/main.js'
+import vueInstance from '../../views/runner/main.js'
 
 export default {
   computed: {

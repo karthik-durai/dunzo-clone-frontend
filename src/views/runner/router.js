@@ -5,12 +5,11 @@ import showAssignmentDetails from '../../components/assignments/showAssignmentDe
 import userInfo from '../../components/user/userInfo.vue'
 import runnerMenu from '../../components/menu/runnerMenu.vue'
 import runnerProfile from '../../components/profile/runnerProfile.vue'
-import login from '../../components/login/login.vue'
+// import login from '../../components/login/login.vue'
 
 Vue.use(Router)
 
 export default new Router({
-  mode: 'history',
   routes: [
     {
       path: '/',
@@ -55,11 +54,11 @@ export default new Router({
           components: runnerMenu
         }
       ]
-    },
-    {
-      path: '/login',
-      component: login
     }
+    // {
+    //   path: '/login',
+    //   component: login
+    // }
     // {
     //   path: '/about',
     //   name: 'about',
