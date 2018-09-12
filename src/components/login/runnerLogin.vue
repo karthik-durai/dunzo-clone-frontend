@@ -2,9 +2,10 @@
   <div class="login-component">
     <div class="heading">
       <h1 class="heading__h1">Dunzo-Clone</h1>
+      <h2>Hey, Runner</h2>
     </div>
     <p v-if="fetchingURL">loading</p>
-    <a v-else v-bind:href="loginURL"></a>
+    <a v-else v-bind:href="loginURL">Sign in with google</a>
     <!-- <signin-button
       v-else
       v-bind:loginURL="loginURL"
@@ -28,7 +29,7 @@ export default {
   methods: {
     async getLoginURL() {
       try {
-        let fetchedObj =  await fetch('http://localhost:8000/user/getLoginURL')
+        let fetchedObj =  await fetch('http://localhost:8000/runner/login')
         let url = (await fetchedObj.json()).url
         return url
       } catch (err) {
@@ -48,26 +49,5 @@ export default {
 </script>
 
 <style>
-.login-component {
-  display: flex;
-  height: inherit;
-  margin: 0.5em 0.5em;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.heading {
-  margin: 0;
-  height: 10vh;
-  justify-content: center;
-  align-items: center;
-  flex: 1;
-  display: flex;
-}
-
-.heading__h1 {
-  font-family: Helvetica, sans-serif;
-  font-weight: 200;
-}
-
+  
 </style>

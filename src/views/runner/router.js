@@ -1,11 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import showAssignments from '../../components/assignments/showAssignments.vue'
+import showCurrentAssignments from '../../components/assignments/showCurrentAssignments.vue'
 import showAssignmentDetails from '../../components/assignments/showAssignmentDetails.vue'
 import userInfo from '../../components/user/userInfo.vue'
-import runnerMenu from '../../components/menu/runnerMenu.vue'
+// import runnerMenu from '../../components/menu/runnerMenu.vue'
 import runnerProfile from '../../components/profile/runnerProfile.vue'
-// import login from '../../components/login/login.vue'
+import runnerLogin from '../../components/login/runnerLogin.vue'
 
 Vue.use(Router)
 
@@ -13,52 +13,28 @@ export default new Router({
   routes: [
     {
       path: '/',
-      redirect: '/showAssignments'
+      redirect: '/showCurrentAssignments'
     },
     {
-      path: '/showAssignments',
-      component: showAssignments,
-      children: [
-        {
-          path: 'menu',
-          components: runnerMenu
-        }
-      ]
+      path: '/showCurrentAssignments',
+      component: showCurrentAssignments
     },
     {
-      path: '/showAssignments/:id',
-      component: showAssignmentDetails,
-      children: [
-        {
-          path: 'menu',
-          components: runnerMenu
-        }
-      ]
+      path: '/showCurrentAssignments/:id',
+      component: showAssignmentDetails
     },
     {
-      path: '/showAssignments/:id/userInfo',
-      component: userInfo,
-      children: [
-        {
-          path: 'menu',
-          components: runnerMenu
-        }
-      ]
+      path: '/showCurrentAssignments/:id/userInfo',
+      component: userInfo
     },
     {
       path: '/myProfile',
-      component: runnerProfile,
-      children: [
-        {
-          path: 'menu',
-          components: runnerMenu
-        }
-      ]
+      component: runnerProfile
+    },
+    {
+      path: '/login',
+      component: runnerLogin
     }
-    // {
-    //   path: '/login',
-    //   component: login
-    // }
     // {
     //   path: '/about',
     //   name: 'about',

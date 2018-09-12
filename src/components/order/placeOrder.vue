@@ -8,14 +8,8 @@
       <input type="text" v-model="orderDescription" 
         v-bind:placeholder="descriptionPlaceholder"
         class="place-order-form__description">
-        <div>
-          <from-location-suggestion 
-            v-bind:placeholder="fromAddressPlaceholder"/>
-        </div>
-        <div>
-          <to-location-suggestion 
-            v-bind:placeholder="toAddressPlaceholder"/>
-        </div>
+      <input-pick-up
+        v-on:input-type="renderInputComponent"/>
       <button @click="placeOrder" class="place-order-form__submit">place</button>
     </div>
     <information
@@ -29,29 +23,30 @@
 
 <script>
 import information from '../status/placeOrderMessages/information.vue'
-import fromLocationSuggestion from '../location/locationSuggestion.vue'
-import toLocationSuggestion from '../location/locationSuggestion.vue'
+import inputPickUp from '../location/inputPickUp.vue'
+import vueInstance from '../../views/user/main.js'
 
 export default {
+  props: ['coords'],
   components: {
     information,
-    fromLocationSuggestion,
-    toLocationSuggestion
+    inputPickUp,
   },
   data() {
     return {
       orderDescription: '',
       descriptionPlaceholder: 'Type your order and click place',
-      fromAddressPlaceholder: 'Pick up address',
-      toAddressPlaceholder: 'Drop address',
       hasLessChars: false,
       hasFailedToPlace: false,
       hasInvalidChars: false,
       hasPlaced: false,
       postOrderUrl: 'http://localhost:8000/user/placeorder',
       latitude: 0,
-      longitude: 0
+      longitude: 0,
     }
+  },
+  mounted() {
+    console.log(this.coords)
   },
   methods: {
     async placeOrder () {
@@ -90,11 +85,13 @@ export default {
       if (status) {
         this.hasPlaced = true
         this.hasFailedToPlace = false
-        // ChIJnQ6LHgUUrjsRnE_kgP4CRGU
       } else {
         this.hasFailedToPlace = true
         this.hasPlaced = false
       }
+    },
+    renderInputComponent (inputType) {
+      vueInstance.$router.push({ path: `${vueInstance.$route.path}/${inputType}`})
     }
   }
 }

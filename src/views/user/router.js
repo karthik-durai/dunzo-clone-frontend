@@ -8,6 +8,8 @@ import userProfile from '../../components/profile/userProfile.vue'
 import userMenu from '../../components/menu/userMenu.vue'
 import about from '../../components/about/about.vue'
 import runnerInfo from '../../components/runner/runnerInfo.vue'
+import addressForm from '../../components/location/addressForm.vue'
+import autoComplete from '../../components/location/autoComplete.vue'
 
 Vue.use(Router)
 
@@ -27,6 +29,14 @@ export default new Router({
           component: userMenu
         }
       ]
+    },
+    {
+      path: '/placeOrder/addressForm',
+      component: addressForm
+    },
+    {
+      path: '/placeOrder/autoComplete',
+      component: autoComplete
     },
     {
       path: '/login',

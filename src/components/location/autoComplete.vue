@@ -5,10 +5,6 @@
         list="location-list"
         v-model="value"
         ref="addressInput">
-    <datalist id="location-list">
-      <option>current location</option>
-      <option></option>
-    </datalist>
     <p @click="test">getplace</p>
     <p @click="test1">getco</p>
   </div>
