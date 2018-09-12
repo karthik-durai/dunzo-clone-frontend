@@ -31,11 +31,19 @@ export default new Router({
       ]
     },
     {
-      path: '/placeOrder/addressForm',
+      path: '/placeOrder/providePickUpAddress/addressForm',
       component: addressForm
     },
     {
-      path: '/placeOrder/autoComplete',
+      path: '/placeOrder/providePickUpAddress/autoComplete',
+      component: autoComplete
+    },
+    {
+      path: '/placeOrder/provideDropAddress/addressForm',
+      component: addressForm
+    },
+    {
+      path: '/placeOrder/provideDropAddress/autoComplete',
       component: autoComplete
     },
     {

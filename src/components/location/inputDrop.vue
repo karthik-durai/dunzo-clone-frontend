@@ -1,6 +1,6 @@
 <template>
   <div>
-    <label for="input-pick-up">Provide Pick Up Location</label>
+    <label for="input-pick-up">Provide Drop Location</label>
     <select id="input-pick-up" v-model="inputType">
       <option value="">--Choose an option--</option>
       <option value="CurrentLocation">Current Location</option>
@@ -20,7 +20,7 @@ export default {
   },
   watch: {
     inputType() {
-      this.$emit('input-type', { input: this.inputType, type: 'pickUp' })
+      this.$emit('input-type', { input: this.inputType, type: 'drop' })
     }
   }
 }

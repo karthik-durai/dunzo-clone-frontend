@@ -10,6 +10,8 @@
         class="place-order-form__description">
       <input-pick-up
         v-on:input-type="renderInputComponent"/>
+      <input-drop
+        v-on:input-type="renderInputComponent"/>
       <button @click="placeOrder" class="place-order-form__submit">place</button>
     </div>
     <information
@@ -24,13 +26,15 @@
 <script>
 import information from '../status/placeOrderMessages/information.vue'
 import inputPickUp from '../location/inputPickUp.vue'
+import inputDrop from '../location/inputDrop.vue'
 import vueInstance from '../../views/user/main.js'
 
 export default {
-  props: ['coords'],
+  props: ['pickUpCoords', 'dropCoords'],
   components: {
     information,
     inputPickUp,
+    inputDrop
   },
   data() {
     return {
@@ -41,12 +45,10 @@ export default {
       hasInvalidChars: false,
       hasPlaced: false,
       postOrderUrl: 'http://localhost:8000/user/placeorder',
-      latitude: 0,
-      longitude: 0,
     }
   },
   mounted() {
-    console.log(this.coords)
+    console.log(this.pickUpCoords, this.dropCoords)
   },
   methods: {
     async placeOrder () {
@@ -91,7 +93,14 @@ export default {
       }
     },
     renderInputComponent (inputType) {
-      vueInstance.$router.push({ path: `${vueInstance.$route.path}/${inputType}`})
+      let endPoint = ''
+      if (inputType.type === 'pickUp') {
+        endPoint = 'providePickUpAddress'
+        vueInstance.$router.push({ path: `${vueInstance.$route.path}/${endPoint}/${inputType.input}`})
+      } else if (inputType.type === 'drop') {
+        endPoint = 'provideDropAddress'
+        vueInstance.$router.push({ path: `${vueInstance.$route.path}/${endPoint}/${inputType.input}`})
+      }
     }
   }
 }
