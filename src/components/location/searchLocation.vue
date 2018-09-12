@@ -43,7 +43,9 @@ export default {
       let coords = await this.getCoords(placeId)
       let lat = coords.geometry.location.lat()
       let lng = coords.geometry.location.lng()
-      this.$emit('coords', [this.addressType, { lat: lat, lng: lng }])
+      let address = coords.formatted_address
+      this.$emit('coords', [this.addressType, { coords: { lat: lat, lng: lng }, address: address }])
+      vueInstance.$router.go(-1)
     },
     async getCoords (placeId) {
       let geoCoder = new google.maps.Geocoder()

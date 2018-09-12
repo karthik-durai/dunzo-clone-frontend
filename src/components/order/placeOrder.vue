@@ -12,7 +12,7 @@
         v-on:input-type="renderInputComponent"/>
       <input-drop
         v-on:input-type="renderInputComponent"/>
-      <button @click="placeOrder" class="place-order-form__submit">place</button>
+      <button v-on:click="placeOrder" class="place-order-form__submit">place</button>
     </div>
     <information
       v-bind:lessChars = "hasLessChars"
@@ -30,7 +30,7 @@ import inputDrop from '../location/inputDrop.vue'
 import vueInstance from '../../views/user/main.js'
 
 export default {
-  props: ['pickUpCoords', 'dropCoords'],
+  props: ['pickUpLocation', 'dropLocation'],
   components: {
     information,
     inputPickUp,
@@ -47,58 +47,45 @@ export default {
       postOrderUrl: 'http://localhost:8000/user/placeorder',
     }
   },
-  mounted() {
-    console.log(this.pickUpCoords, this.dropCoords)
-  },
   methods: {
-    async placeOrder () {
-      try{
-        if (!this.checkIfLessChars()) {
-          this.hasLessChars = false
-          let status = (await 
-            (await fetch(this.postOrderUrl, this.constructBodyToPost()))
-            .json()).status
-          this.determineStatusMessage(status)
-        } else {
-          this.hasLessChars = true
-        }
-      } catch (err) {
-          this.hasFailedToPlace = true
+    async placeOrder() {
+      let validatedResult = this.validateForm(this.orderDescription, this.pickUpLocation, this.dropLocation)
+      if (validatedResult) {
+        let body = this.constructOrderBody(this.orderDescription, this.pickUpLocation.coords, this.dropLocation.coords)
+        let postResult = await this.postOrder(body)
+        console.log(postResult)
       }
     },
-    checkIfLessChars () {
-      return this.orderDescription.length <= 10 ? true : false
+    async postOrder(body) {
+      let status = (await (await fetch(this.postOrderUrl, this.constructFetchBody(body))).json()).status
+      return status
     },
-    checkIfInvalidChars () {
+    validateForm(description, pickup, drop) {
+      if (description.length >= 10 && pickup.coords && drop.coords) return true
       return false
     },
-    constructBodyToPost () {
+    constructOrderBody (description, pickup, drop) {
       return {
-        method: 'post',
-        mode: 'cors',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': document.cookie.split(';')[1].split('=')[1]
-        },
-        body: JSON.stringify({description: this.orderDescription})
+        description: description,
+        from: [pickup.lng, pickup.lat],
+        to: [drop.lng, drop.lat]
       }
     },
-    determineStatusMessage (status) {
-      if (status) {
-        this.hasPlaced = true
-        this.hasFailedToPlace = false
-      } else {
-        this.hasFailedToPlace = true
-        this.hasPlaced = false
+    constructFetchBody (body) {
+      return {
+        method: 'post',
+        headers: {
+          authorization: document.cookie.split(';')[1].split('=')[1]
+        },
+        body: JSON.stringify(body)
       }
     },
     renderInputComponent (inputType) {
-      let endPoint = ''
       if (inputType.type === 'pickUp') {
-        endPoint = 'providePickUpAddress'
+        let endPoint = 'providePickUpAddress'
         vueInstance.$router.push({ path: `${vueInstance.$route.path}/${endPoint}/${inputType.input}`})
       } else if (inputType.type === 'drop') {
-        endPoint = 'provideDropAddress'
+        let endPoint = 'provideDropAddress'
         vueInstance.$router.push({ path: `${vueInstance.$route.path}/${endPoint}/${inputType.input}`})
       }
     }

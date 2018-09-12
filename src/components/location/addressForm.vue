@@ -25,7 +25,9 @@ export default {
       let result = await this.obtainGeocode(geocoderObj, address)
       let lat = result.geometry.location.lat()
       let lng = result.geometry.location.lng()
-      this.$emit('coords', [this.addressType, { lat: lat, lng: lng }])
+      address = result.formatted_address
+      this.$emit('coords', [this.addressType, { coords: { lat: lat, lng: lng }, address: address }])
+      vueInstance.$router.go(-1)
     },
     composeAddress (num, st, loc) {
       return `${num}, ${st}, ${loc}, Bangalore`

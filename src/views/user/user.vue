@@ -1,24 +1,25 @@
 <template>
   <router-view
   v-on:coords="getCoords"
-  v-bind:pickUpCoords="pickUpCoords"
-  v-bind:dropCoords="dropCoords"/>
+  v-bind:pickUpLocation="pickUpLocation"
+  v-bind:dropLocation="dropLocation"/>
 </template>
 
 <script>
 export default {
   data() {
     return {
-      pickUpCoords: null, 
-      dropCoords: null
+      pickUpLocation: null, 
+      dropLocation: null
     }
   },
   methods: {
     getCoords (data) {
+      console.log('here', data)
       if (data[0] === 'provideDropAddress') {
-        this.pickUpCoords = data[1]
+        this.dropLocation = data[1]
       } else if (data[0] === 'providePickUpAddress') {
-        this.dropCoords = data[1]
+        this.pickUpLocation = data[1]
       }
     }
   }
