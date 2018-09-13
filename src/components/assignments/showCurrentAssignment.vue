@@ -17,7 +17,7 @@ export default {
   data() {
     return {
       currentOrderUrl: 'http://localhost:8000/runner/currentOrder',
-      order: {}
+      order: null
     }
   },
   methods: {
@@ -30,7 +30,7 @@ export default {
       return {
         mode: 'cors',
         headers: {
-          authorization: document.cookie.split(';')[1].split('=')[1]
+          authorization: document.cookie.split(';').map(e=>e.trim()).filter(e=>e.startsWith('access_token='))[0].substring(13)
         }
       }
     }
