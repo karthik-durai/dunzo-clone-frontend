@@ -4,6 +4,7 @@
     <router-view/>
     <div>
       <p>{{ order }}</p>
+      <button v-on:click="fulfillOrder">fulfill</button>
     </div>
   </div>
 </template>
@@ -17,6 +18,7 @@ export default {
   data() {
     return {
       currentOrderUrl: 'http://localhost:8000/runner/currentOrder',
+      fulfillOrderUrl: 'http://localhost:8000/runner/fulfillorder',
       order: null
     }
   },
@@ -33,6 +35,10 @@ export default {
           authorization: document.cookie.split(';').map(e=>e.trim()).filter(e=>e.startsWith('access_token='))[0].substring(13)
         }
       }
+    },
+    async fulfillOrder() {
+      let fetchedObj = await fetch(this.fulfillOrderUrl, {...this.constructFetchBody(), method: 'post'})
+      console.log(await fetchedObj.json())
     }
   },
   async mounted() {
