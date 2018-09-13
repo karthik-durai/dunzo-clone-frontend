@@ -2,7 +2,9 @@
   <div> 
     <router-link to="/showAssignments/menu">menu</router-link>
     <router-view/>
-    <p>assigment</p>
+    <div>
+      <p>{{ order }}</p>
+    </div>
   </div>
 </template>
 
@@ -15,27 +17,27 @@ export default {
   data() {
     return {
       currentOrderUrl: 'http://localhost:8000/runner/currentOrder',
-      orders: {}
+      order: {}
     }
   },
   methods: {
     async getCurrentAssignments () {
       let fetchedObj = await fetch(this.currentOrderUrl, this.constructFetchBody())
-      let orders = await fetchedObj.json()
-      return orders
+      let order = await fetchedObj.json()
+      return order
     },
     constructFetchBody() {
       return {
         mode: 'cors',
         headers: {
-          // authorization: document.cookie.split(';')[1].split('=')[1]
+          authorization: document.cookie.split(';')[1].split('=')[1]
         }
       }
     }
   },
   async mounted() {
-    this.orders = await this.getCurrentAssignments()
-    console.log(this.orders)
+    this.order = await this.getCurrentAssignments()
+    console.log(this.order)
   }
 }
 </script>

@@ -1,8 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import showCurrentAssignments from '../../components/assignments/showCurrentAssignments.vue'
-import showAssignmentDetails from '../../components/assignments/showAssignmentDetails.vue'
-import userInfo from '../../components/user/userInfo.vue'
+import showCurrentAssignment from '../../components/assignments/showCurrentAssignment.vue'
+import showPastAssignments from '../../components/assignments/showPastAssignments.vue'
 // import runnerMenu from '../../components/menu/runnerMenu.vue'
 import runnerProfile from '../../components/profile/runnerProfile.vue'
 import runnerLogin from '../../components/login/runnerLogin.vue'
@@ -13,19 +12,15 @@ export default new Router({
   routes: [
     {
       path: '/',
-      redirect: '/showCurrentAssignments'
+      redirect: '/showCurrentAssignment'
     },
     {
-      path: '/showCurrentAssignments',
-      component: showCurrentAssignments
+      path: '/showCurrentAssignment',
+      component: showCurrentAssignment
     },
     {
-      path: '/showCurrentAssignments/:id',
-      component: showAssignmentDetails
-    },
-    {
-      path: '/showCurrentAssignments/:id/userInfo',
-      component: userInfo
+      path: '/showPastAssignments',
+      component: showPastAssignments
     },
     {
       path: '/myProfile',

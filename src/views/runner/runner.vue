@@ -16,7 +16,7 @@ export default {
       navigator.geolocation.watchPosition(pos => {
         this.lat = pos.coords.latitude
         this.lng = pos.coords.longitude
-        this.socket.emit('postion update', [this.lng, this.lat])
+        this.socket.emit('position update', [this.lng, this.lat])
         console.log(this.lat, this.lng)
       })
     }
