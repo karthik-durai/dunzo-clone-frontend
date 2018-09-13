@@ -26,8 +26,9 @@ export default {
     },
     constructFetchBody() {
       return {
+        mode: 'cors',
         headers: {
-          authorization: document.cookie.split(';')[1].split('=')[1]
+          // authorization: document.cookie.split(';')[1].split('=')[1]
         }
       }
     }
