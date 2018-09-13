@@ -42,7 +42,7 @@ export default {
     constructBodyToFetch() {
       return {
         headers: {
-          'Authorization': document.cookie.split(';')[1].split('=')[1]
+          'authorization': document.cookie.split(';')[1].split('=')[1]
         }
       }
     }

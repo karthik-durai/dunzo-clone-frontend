@@ -5,7 +5,7 @@
       <li><router-link to="/showOrders">show my orders</router-link></li>
       <li><router-link to="/myProfile">my profile</router-link></li>
       <li><router-link to="/about">about</router-link></li>
-      <li><a href="" role="button">sign out</a></li>
+      <li><a href="http://localhost:8000/user/signout" role="button">sign out</a></li>
     </menu>
   </div>
 </template>
