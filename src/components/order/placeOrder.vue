@@ -51,7 +51,7 @@ export default {
     async placeOrder() {
       let validatedResult = this.validateForm(this.orderDescription, this.pickUpLocation, this.dropLocation)
       if (validatedResult) {
-        let body = this.constructOrderBody(this.orderDescription, this.pickUpLocation.coords, this.dropLocation.coords)
+        let body = this.constructOrderBody(this.orderDescription, this.pickUpLocation, this.dropLocation)
         let postResult = await this.postOrder(body)
         console.log(postResult)
       }
@@ -67,8 +67,10 @@ export default {
     constructOrderBody (description, pickup, drop) {
       return {
         description: description,
-        from: [pickup.lng, pickup.lat],
-        to: [drop.lng, drop.lat]
+        from: [pickup.coords.lng, pickup.coords.lat],
+        to: [drop.coords.lng, drop.coords.lat],
+        fromAddr: pickup.address,
+        toAddr: drop.address
       }
     },
     constructFetchBody (body) {
