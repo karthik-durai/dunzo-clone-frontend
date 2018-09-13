@@ -76,8 +76,10 @@ export default {
     constructFetchBody (body) {
       return {
         method: 'post',
+        mode: 'cors',
         headers: {
-          authorization: document.cookie.split(';')[1].split('=')[1]
+          'authorization': document.cookie.split(';')[1].split('=')[1],
+          'content-type': 'application/json'
         },
         body: JSON.stringify(body)
       }
