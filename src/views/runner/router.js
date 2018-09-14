@@ -2,9 +2,10 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import showCurrentAssignment from '../../components/assignments/showCurrentAssignment.vue'
 import showPastAssignments from '../../components/assignments/showPastAssignments.vue'
-// import runnerMenu from '../../components/menu/runnerMenu.vue'
+import runnerMenu from '../../components/menu/runnerMenu.vue'
 import runnerProfile from '../../components/profile/runnerProfile.vue'
 import runnerLogin from '../../components/login/runnerLogin.vue'
+import about from '../../components/about/about.vue'
 
 Vue.use(Router)
 
@@ -16,19 +17,47 @@ export default new Router({
     },
     {
       path: '/showCurrentAssignment',
-      component: showCurrentAssignment
+      component: showCurrentAssignment,
+      children: [
+        {
+          path: 'menu',
+          component: runnerMenu
+        }
+      ]
     },
     {
       path: '/showPastAssignments',
-      component: showPastAssignments
+      component: showPastAssignments,
+      children: [
+        {
+          path: 'menu',
+          component: runnerMenu
+        }
+      ]
     },
     {
       path: '/myProfile',
-      component: runnerProfile
+      component: runnerProfile,
+      children: [
+        {
+          path: 'menu',
+          component: runnerMenu
+        }
+      ]
     },
     {
       path: '/login',
       component: runnerLogin
+    },
+    {
+      path: '/about',
+      component: about,
+      children: [
+        {
+          path: 'menu',
+          component: runnerMenu
+        }
+      ]
     }
     // {
     //   path: '/about',

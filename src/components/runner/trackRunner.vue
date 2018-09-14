@@ -8,13 +8,14 @@
 
 <script>
 export default {
+  props: ['orderId'],
   data() {
     return {
-      map: '',
-      // latAndLng: {lat: 12.9608311, lng: 76.64365539999994},
+      map: null,
       lat: 12.9608311,
       lng: 76.64365539999994,
-      marker: ''
+      marker: null,
+      socket: io('http://localhost:8000/')
     }
   },
   methods: {
@@ -28,19 +29,30 @@ export default {
         position: { lat: parseFloat(this.lat), lng: this.lng },
         optimized: false
       })
+    },
+    dropMarker () {
+      this.marker.setMap(null)
+      this.map.setCenter({ lat: parseFloat(this.lat), lng: parseFloat(this.lng) })
+      this.putMarker()
     }
   },
   watch: {
     lat() {
-      console.log(parseFloat(this.lat))
-      this.marker.setMap(null)
-      this.map.setCenter({ lat: parseFloat(this.lat), lng: this.lng })
-      this.putMarker()
+      this.dropMarker()
+    },
+    lng() {
+      this.dropMarker()
     }
   },
   mounted() {
     this.renderMap()
     this.putMarker()
+    this.socket.emit('position request', this.orderId)
+    this.socket.on('runner position', (pos) => { 
+      console.log('runner position', pos)
+      this.lng = pos[1]
+      this.lat = pos[0]
+    })
   }
 }
 </script>

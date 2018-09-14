@@ -6,6 +6,7 @@
     </div>
     <list-order-details
       v-bind:order="orderDetails"
+      v-bind:currentRoute="currentRoute"
       class="each-order"/>
     <track-runner
       class="tracker-map"/>
@@ -32,6 +33,9 @@ export default {
     menuRoute() {
       return `/showOrders/${ vueInstance.$route.params.id }/menu`
     },
+    currentRoute() {
+      return `/showOrders/${ vueInstance.$route.params.id }`
+    },
     getOrderDetailsUrl() {
       return `${this.orderDetailsUrl}${vueInstance.$route.params.id}`
     }
@@ -47,7 +51,7 @@ export default {
     constructBodyToFetch() {
       return {
         headers: {
-          'Authorization': document.cookie.split(';')[1].split('=')[1]
+          'authorization': document.cookie.split(';').map(e=>e.trim()).filter(e=>e.startsWith('access_token='))[0].substring(13)
         }
       }
     }

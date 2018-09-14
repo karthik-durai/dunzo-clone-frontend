@@ -7,9 +7,9 @@ import showOrderDetails from '../../components/order/showOrderDetails.vue'
 import userProfile from '../../components/profile/userProfile.vue'
 import userMenu from '../../components/menu/userMenu.vue'
 import about from '../../components/about/about.vue'
-import runnerInfo from '../../components/runner/runnerInfo.vue'
 import addressForm from '../../components/location/addressForm.vue'
 import searchLocation from '../../components/location/searchLocation.vue'
+import chatWindow from '../../components/chats/chatWindow.vue'
 
 Vue.use(Router)
 
@@ -71,6 +71,16 @@ export default new Router({
       ]
     },
     {
+      path: '/showOrders/:id/chat',
+      component: chatWindow,
+      children: [
+        {
+          path: 'menu',
+          component: userMenu
+        }
+      ]
+    },
+    {
       path: '/myProfile',
       component: userProfile,
       children: [
@@ -83,16 +93,6 @@ export default new Router({
     {
       path: '/about',
       component: about,
-      children: [
-        {
-          path: 'menu',
-          component: userMenu
-        }
-      ]
-    },
-    {
-      path: '/showOrders/:id/runnerInfo',
-      component: runnerInfo,
       children: [
         {
           path: 'menu',

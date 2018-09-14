@@ -1,5 +1,13 @@
 <template>
-  <p>runner profile</p>
+  <div>
+    <router-link to="/myProfile/menu">menu</router-link>
+    <router-view/>
+  <div class="profile">
+      <img v-bind:src="profile.profilePicture" alt="pic" class="profile__pic">
+      <p class="profile__name">{{ profile.name }}</p>
+      <p class="profile__emailID">{{ profile.emailID }}</p>
+  </div>
+  </div>
 </template>
 
 <script>
@@ -19,7 +27,7 @@ export default {
     constructFetchBody() {
       return {
         headers: {
-          authorization: document.cookie.split(';')[1].split('=')[1]
+          authorization: document.cookie.split(';').map(e=>e.trim()).filter(e=>e.startsWith('access_token='))[0].substring(13)
         }
       }
     }
@@ -32,5 +40,7 @@ export default {
 </script>
 
 <style>
-
+.profile__pic {
+  width: 50px;
+}
 </style>

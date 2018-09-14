@@ -1,9 +1,14 @@
 <template>
   <div> 
-    <router-link to="/showAssignments/menu">menu</router-link>
+    <router-link to="/showcurrentAssignment/menu">menu</router-link>
     <router-view/>
     <div>
-      <p>{{ order }}</p>
+      <div>
+        <p>Description: {{ order.description }}</p>
+        <p>Placed-on: {{ order.placedOn }}</p>
+        <p>Pickup: {{ order.fromAddr }}</p>
+        <p>Drop: {{ order.toAddr }}</p>
+      </div>
       <button v-on:click="fulfillOrder">fulfill</button>
     </div>
   </div>
@@ -19,7 +24,7 @@ export default {
     return {
       currentOrderUrl: 'http://localhost:8000/runner/currentOrder',
       fulfillOrderUrl: 'http://localhost:8000/runner/fulfillorder',
-      order: null
+      order: {}
     }
   },
   methods: {
@@ -39,6 +44,7 @@ export default {
     async fulfillOrder() {
       let fetchedObj = await fetch(this.fulfillOrderUrl, {...this.constructFetchBody(), method: 'post'})
       console.log(await fetchedObj.json())
+      this.order = await this.getCurrentAssignments()
     }
   },
   async mounted() {

@@ -20,14 +20,22 @@ export default {
   },
   data() {
     return {
-      getProfileUrl: 'http://localhost:8000/user/getme',
+      getProfileUrl: 'http://localhost:8000/user/profile',
       profile: {}
     }
   },
   methods: {
     async getMyProfile() {
-      let profile = (await (await fetch(this.getProfileUrl)).json()).profile
+      let fetchedObj = await fetch(this.getProfileUrl, this.constructFetchBody())
+      let profile = (await fetchedObj.json())[0]
       return profile
+    },
+    constructFetchBody() {
+      return {
+        headers: {
+          authorization: document.cookie.split(';').map(e=>e.trim()).filter(e=>e.startsWith('access_token='))[0].substring(13)
+        }
+      }
     }
   },
   async mounted() {
@@ -37,15 +45,7 @@ export default {
 </script>
 
 <style>
-.profile {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 1em;
-}
-
 .profile__pic {
   width: 50px;
 }
-
 </style>
