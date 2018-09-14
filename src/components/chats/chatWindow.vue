@@ -5,6 +5,8 @@
 </template>
 
 <script>
+import vueInstance from '../../views/runner/main.js'
+
 export default {
   data () {
     return {
@@ -12,7 +14,7 @@ export default {
     }
   },
   mounted() {
-    console.log(this.socket)
+
   }
 }
 </script>

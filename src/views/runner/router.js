@@ -27,7 +27,7 @@ export default new Router({
       ]
     },
     {
-      path: '/showCurrentAssignment/chat',
+      path: '/showCurrentAssignment/chat:id',
       component: chatWindow
     },
     {
