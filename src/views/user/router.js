@@ -9,7 +9,7 @@ import userMenu from '../../components/menu/userMenu.vue'
 import about from '../../components/about/about.vue'
 import addressForm from '../../components/location/addressForm.vue'
 import searchLocation from '../../components/location/searchLocation.vue'
-import chatWindow from '../../components/chats/chatWindow.vue'
+// import chatWindow from '../../components/chats/chatWindow.vue'
 
 Vue.use(Router)
 
@@ -70,16 +70,16 @@ export default new Router({
         }
       ]
     },
-    {
-      path: '/showOrders/:id/chat',
-      component: chatWindow,
-      children: [
-        {
-          path: 'menu',
-          component: userMenu
-        }
-      ]
-    },
+    // {
+    //   path: '/showOrders/:id/chat',
+    //   component: chatWindow,
+    //   children: [
+    //     {
+    //       path: 'menu',
+    //       component: userMenu
+    //     }
+    //   ]
+    // },
     {
       path: '/myProfile',
       component: userProfile,

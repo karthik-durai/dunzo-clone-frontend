@@ -8,7 +8,7 @@
         <p>Placed-on: {{ order.placedOn }}</p>
         <p>Pickup: {{ order.fromAddr }}</p>
         <p>Drop: {{ order.toAddr }}</p>
-        <a v-bind:href="chatRoute">chat with user</a>
+        <!-- <a v-bind:href="chatRoute">chat with user</a> -->
       </div>
       <button v-on:click="fulfillOrder">fulfill</button>
     </div>
