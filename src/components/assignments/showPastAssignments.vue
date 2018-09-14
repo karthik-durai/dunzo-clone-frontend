@@ -17,7 +17,7 @@ export default {
   methods: {
     async getPastAssignments () {
       let fetchedObj = await fetch(this.pastOrderUrl, this.constructFetchBody())
-      let orders = (await fetchedObj.json())[0]
+      let orders = (await fetchedObj.json())
       return orders
     },
     constructFetchBody() {

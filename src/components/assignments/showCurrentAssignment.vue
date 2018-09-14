@@ -8,6 +8,7 @@
         <p>Placed-on: {{ order.placedOn }}</p>
         <p>Pickup: {{ order.fromAddr }}</p>
         <p>Drop: {{ order.toAddr }}</p>
+        <a href="runner.html#/showcurrentAssignment/chat">chat with user</a>
       </div>
       <button v-on:click="fulfillOrder">fulfill</button>
     </div>
@@ -16,6 +17,8 @@
 
 <script>
 import runnerMenu from '../menu/runnerMenu.vue'
+import vueInstance from '../../views/runner/main.js'
+
 export default {
   components: {
     runnerMenu
@@ -42,7 +45,7 @@ export default {
       }
     },
     async fulfillOrder() {
-      let fetchedObj = await fetch(this.fulfillOrderUrl, {...this.constructFetchBody(), method: 'post'})
+      let fetchedObj = await fetch(this.fulfillOrderUrl, {...this.constructFetchBody(), method: 'post', body: this.order._id })
       console.log(await fetchedObj.json())
       this.order = await this.getCurrentAssignments()
     }
@@ -50,7 +53,7 @@ export default {
   async mounted() {
     this.order = await this.getCurrentAssignments()
     console.log(this.order)
-  }
+  },
 }
 </script>
 
