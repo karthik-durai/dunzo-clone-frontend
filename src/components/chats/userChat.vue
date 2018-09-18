@@ -37,6 +37,7 @@ export default {
   mounted() {
     this.socket.emit('join chat room', this.$route.path.split('/')[2])
     this.socket.on('past messages', this.getPastMessages)
+    this.socket.on('chat message', (messageObj) => this.currentChat.push(messageObj))
   }
 }
 </script>

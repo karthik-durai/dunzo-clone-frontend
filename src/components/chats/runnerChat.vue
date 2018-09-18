@@ -54,6 +54,7 @@ export default {
     this.orderID = currentOrder._id
     this.socket.emit('join chat room', this.orderID)
     this.socket.on('past messages', this.getPastMessages)
+    this.socket.on('chat message', (messageObj) => this.currentChat.push(messageObj))
   }
 }
 </script>
