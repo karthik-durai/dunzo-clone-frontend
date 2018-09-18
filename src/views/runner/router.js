@@ -6,7 +6,6 @@ import runnerMenu from '../../components/menu/runnerMenu.vue'
 import runnerProfile from '../../components/profile/runnerProfile.vue'
 import runnerLogin from '../../components/login/runnerLogin.vue'
 import about from '../../components/about/about.vue'
-// import chatWindow from '../../components/chats/chatWindow.vue'
 
 Vue.use(Router)
 
@@ -26,10 +25,6 @@ export default new Router({
         }
       ]
     },
-    // {
-    //   path: '/showCurrentAssignment/chat:id',
-    //   component: chatWindow
-    // },
     {
       path: '/showPastAssignments',
       component: showPastAssignments,

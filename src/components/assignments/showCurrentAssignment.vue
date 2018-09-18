@@ -8,7 +8,6 @@
         <p>Placed-on: {{ order.placedOn }}</p>
         <p>Pickup: {{ order.fromAddr }}</p>
         <p>Drop: {{ order.toAddr }}</p>
-        <!-- <a v-bind:href="chatRoute">chat with user</a> -->
       </div>
       <button v-on:click="fulfillOrder">fulfill</button>
     </div>
@@ -54,11 +53,6 @@ export default {
     this.order = await this.getCurrentAssignments()
     console.log(this.order)
   },
-  computed: {
-    chatRoute() { 
-      return `runner.html#/showcurrentAssignment/chat/${this.order._id}`
-    }
-  }
 }
 </script>
 

@@ -8,14 +8,13 @@
 
 <script>
 export default {
-  props: ['orderId'],
+  props: ['orderId', 'socket'],
   data() {
     return {
       map: null,
       lat: 12.9608311,
       lng: 76.64365539999994,
-      marker: null,
-      socket: io('http://localhost:8000/')
+      marker: null, 
     }
   },
   methods: {
@@ -34,7 +33,7 @@ export default {
       this.marker.setMap(null)
       this.map.setCenter({ lat: parseFloat(this.lat), lng: parseFloat(this.lng) })
       this.putMarker()
-    }
+    },
   },
   watch: {
     lat() {
@@ -42,7 +41,7 @@ export default {
     },
     lng() {
       this.dropMarker()
-    }
+    },
   },
   mounted() {
     this.renderMap()

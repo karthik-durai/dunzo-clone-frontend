@@ -1,11 +1,8 @@
 <template>
   <div>
-    <div class="menu">
-      <router-link to='/showOrders/menu' class="menu__button">&#9776;</router-link>
-      <router-view/>
-    </div>
     <ol>
-      <li v-for="order of orders">
+      <li v-for="order of orders"
+          v-bind:key="order._id">
         <orderList
         v-bind:order="order"
         v-on:getdetails="changeRoute"/>
@@ -37,7 +34,7 @@ export default {
       return orders.message
     },
     changeRoute(orderId) {
-      vueInstance.$router.push({ path: `${vueInstance.$route.path}/${orderId}` })
+      vueInstance.$router.push({ path: `showOrderDetails/${orderId}` })
     },
     constructBodyToFetch() {
       return {

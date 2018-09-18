@@ -9,12 +9,11 @@ import userMenu from '../../components/menu/userMenu.vue'
 import about from '../../components/about/about.vue'
 import addressForm from '../../components/location/addressForm.vue'
 import searchLocation from '../../components/location/searchLocation.vue'
-// import chatWindow from '../../components/chats/chatWindow.vue'
+import userChat from '../../components/chats/userChat.vue'
 
 Vue.use(Router)
 
 export default new Router({
-  mode: 'history',
   routes: [
     {
       path: '/',
@@ -22,13 +21,7 @@ export default new Router({
     },
     {
       path: '/placeOrder',
-      component: placeOrder,
-      children: [
-        {
-          path: 'menu',
-          component: userMenu
-        }
-      ]
+      component: placeOrder
     },
     {
       path: '/placeOrder/providePickUpAddress/addressForm',
@@ -52,53 +45,23 @@ export default new Router({
     },
     {
       path: '/showOrders',
-      component: showOrders,
-      children: [
-        {
-          path: 'menu',
-          component: userMenu
-        }
-      ]
+      component: showOrders
     },
     {
-      path: '/showOrders/:id',
-      component: showOrderDetails,
-      children: [
-        {
-          path: 'menu',
-          component: userMenu
-        }
-      ]
+      path: '/showOrderDetails/:id',
+      component: showOrderDetails
     },
-    // {
-    //   path: '/showOrders/:id/chat',
-    //   component: chatWindow,
-    //   children: [
-    //     {
-    //       path: 'menu',
-    //       component: userMenu
-    //     }
-    //   ]
-    // },
+    {
+      path: '/showOrderDetails/:id/chat',
+      component: userChat
+    },
     {
       path: '/myProfile',
-      component: userProfile,
-      children: [
-        {
-          path: 'menu',
-          component: userMenu
-        }
-      ]
+      component: userProfile
     },
     {
       path: '/about',
-      component: about,
-      children: [
-        {
-          path: 'menu',
-          component: userMenu
-        }
-      ]
+      component: about
     }
     // {
     //   path: '/about',

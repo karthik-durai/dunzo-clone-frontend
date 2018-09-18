@@ -1,9 +1,5 @@
 <template>
   <div>
-    <div class="menu">
-      <router-link to='/myProfile/menu' class="menu__button">&#9776;</router-link>
-      <router-view/>
-    </div>
     <div class="profile">
       <img v-bind:src="profile.profilePicture" alt="pic" class="profile__pic">
       <p class="profile__name">{{ profile.name }}</p>

@@ -1,14 +1,11 @@
 <template>
   <div class="order-details">
-    <div class="menu">
-      <router-link v-bind:to="menuRoute" class="menu__button">&#9776;</router-link>
-      <router-view/>
-    </div>
     <list-order-details
       v-bind:order="orderDetails"
-      v-bind:currentRoute="currentRoute"
       class="each-order"/>
     <track-runner
+      v-bind:orderId="orderId"
+      v-bind:socket="socket"
       class="tracker-map"/>
   </div>
 </template>
@@ -19,6 +16,7 @@ import listOrderDetails from './listOrderDetails.vue'
 import trackRunner from '../runner/trackRunner.vue'
 
 export default {
+  props: ['socket'],
   components: {
     listOrderDetails,
     trackRunner
@@ -30,22 +28,19 @@ export default {
     }
   },
   computed: {
-    menuRoute() {
-      return `/showOrders/${ vueInstance.$route.params.id }/menu`
-    },
-    currentRoute() {
-      return `/showOrders/${ vueInstance.$route.params.id }`
+    orderId() {
+      return this.$route.params.id
     },
     getOrderDetailsUrl() {
-      return `${this.orderDetailsUrl}${vueInstance.$route.params.id}`
-    }
+      return `${this.orderDetailsUrl}${this.orderId}`
+    },
   },
   methods: {
     async getOrderDetails (url) {
       try {
         return (await (await fetch(url, this.constructBodyToFetch())).json()).details
       } catch(e) {
-        console.log('error', e)
+
       }
     },
     constructBodyToFetch() {

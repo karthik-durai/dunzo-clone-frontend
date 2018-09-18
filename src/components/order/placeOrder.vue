@@ -1,9 +1,5 @@
 <template>
   <div>
-    <div class="menu">
-      <router-link to='/placeOrder/menu' class="menu__button">&#9776;</router-link>
-      <router-view/>
-    </div>
     <div class="place-order-form">
       <input type="text" v-model="orderDescription" 
         v-bind:placeholder="descriptionPlaceholder"
