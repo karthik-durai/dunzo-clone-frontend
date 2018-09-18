@@ -3,7 +3,6 @@
     <input type="text" v-bind:placeholder="placeholder" 
         v-model="value"
         ref="addressInput">
-    <button v-on:click="emitCoords">ok</button>
   </div>
 </template>
 
@@ -35,6 +34,7 @@ export default {
       let input = this.$refs.addressInput
       let autocomplete = new google.maps.places.Autocomplete(input, options)
       autocomplete.setBounds(bounds.getBounds())
+      autocomplete.addListener('place_changed', this.emitCoords)
       return autocomplete
     },
     async emitCoords () {
