@@ -22,12 +22,18 @@ export default {
     return {
       message: '',
       pastChats: [],
-      currentChat: []
+      currentChat: [],
+      orderID: null
     }
   },
   methods: {
+    async getCurrentAssignment () {
+      let fetchedObj = await fetch(this.currentOrderUrl, this.constructFetchBody())
+      let order = await fetchedObj.json()
+      return order
+    },
     sendMessage () {
-      this.socket.emit('chat message', [this.$route.params.id, this.message])
+      this.socket.emit('chat message', [this.orderID, this.message])
       this.currentChat.push({ from: 'you', message: this.message })
     },
     getPastMessages (messages) {
@@ -35,8 +41,18 @@ export default {
       this.pastChats = messages
     }
   },
-  mounted() {
-    this.socket.emit('join chat room', this.$route.params.id)
+  async mounted() {
+    const currentOrder = await (await fetch(
+      'http://localhost:8000/runner/currentOrder',
+      {
+        mode: 'cors',
+        headers: {
+          authorization: document.cookie.split(';').map(e=>e.trim()).filter(e=>e.startsWith('access_token='))[0].substring(13)
+        }
+      }
+    )).json()
+    this.orderID = currentOrder._id
+    this.socket.emit('join chat room', this.orderID)
     this.socket.on('past messages', this.getPastMessages)
   }
 }
