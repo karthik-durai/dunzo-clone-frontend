@@ -35,12 +35,13 @@ export default {
       return {
         mode: 'cors',
         headers: {
-          authorization: document.cookie.split(';').map(e=>e.trim()).filter(e=>e.startsWith('access_token='))[0].substring(13)
+          authorization: document.cookie.split(';').map(e=>e.trim()).filter(e=>e.startsWith('access_token='))[0].substring(13),
+          'content-type': 'application/json'
         }
       }
     },
     async fulfillOrder() {
-      let fetchedObj = await fetch(this.fulfillOrderUrl, {...this.constructFetchBody(), method: 'post', body: this.order._id })
+      let fetchedObj = await fetch(this.fulfillOrderUrl, {...this.constructFetchBody(), method: 'post', body: JSON.stringify({orderID: this.order._id}) })
       console.log(await fetchedObj.json())
       this.order = await this.getCurrentAssignments()
     }
