@@ -1,25 +1,20 @@
 <template>
   <div>
-    <label for="input-pick-up">Provide Drop Location</label>
-    <select id="input-pick-up" v-model="inputType">
-      <option value="">--Choose an option--</option>
-      <option value="addressForm">Address Form</option>
-      <option value="searchLocation">Search Location</option>
-    </select>
+    <search-location
+      v-on:coords="getDropLocation"/>
   </div>
 </template>
 
 <script>
+import searchLocation from './searchLocation.vue'
 
 export default {
-  data() {
-    return {
-      inputType:''
-    }
+  components: {
+    searchLocation
   },
-  watch: {
-    inputType() {
-      this.$emit('input-type', { input: this.inputType, type: 'drop' })
+  methods: {
+    getDropLocation (location) {
+      this.$emit('dropLocation', location)
     }
   }
 }

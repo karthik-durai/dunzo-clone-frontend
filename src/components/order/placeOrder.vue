@@ -5,9 +5,9 @@
         v-bind:placeholder="descriptionPlaceholder"
         class="place-order-form__description">
       <input-pick-up
-        v-on:input-type="renderInputComponent"/>
+        v-on:pickUpLocation="getPickUpLocation"/>
       <input-drop
-        v-on:input-type="renderInputComponent"/>
+        v-on:dropLocation="getDropLocation"/>
       <button v-on:click="placeOrder" class="place-order-form__submit">place</button>
     </div>
     <information
@@ -26,7 +26,6 @@ import inputDrop from '../location/inputDrop.vue'
 import vueInstance from '../../views/user/main.js'
 
 export default {
-  props: ['pickUpLocation', 'dropLocation'],
   components: {
     information,
     inputPickUp,
@@ -41,11 +40,14 @@ export default {
       hasInvalidChars: false,
       hasPlaced: false,
       postOrderUrl: 'http://localhost:8000/user/placeorder',
+      pickUpLocation: {},
+      dropLocation: {}
     }
   },
   methods: {
     async placeOrder() {
       let validatedResult = this.validateForm(this.orderDescription, this.pickUpLocation, this.dropLocation)
+      console.log(this.pickUpLocation, this.dropLocation)
       if (validatedResult) {
         let body = this.constructOrderBody(this.orderDescription, this.pickUpLocation, this.dropLocation)
         let postResult = await this.postOrder(body)
@@ -59,6 +61,14 @@ export default {
     validateForm(description, pickup, drop) {
       if (description.length >= 10 && pickup.coords && drop.coords) return true
       return false
+    },
+    getPickUpLocation (location) {
+      this.pickUpLocation.coords = location.coords
+      this.pickUpLocation.address = location.address
+    },
+    getDropLocation (location) {
+      this.dropLocation.coords = location.coords
+      this.dropLocation.address = location.address
     },
     constructOrderBody (description, pickup, drop) {
       return {
@@ -80,15 +90,6 @@ export default {
         body: JSON.stringify(body)
       }
     },
-    renderInputComponent (inputType) {
-      if (inputType.type === 'pickUp') {
-        let endPoint = 'providePickUpAddress'
-        vueInstance.$router.push({ path: `${vueInstance.$route.path}/${endPoint}/${inputType.input}`})
-      } else if (inputType.type === 'drop') {
-        let endPoint = 'provideDropAddress'
-        vueInstance.$router.push({ path: `${vueInstance.$route.path}/${endPoint}/${inputType.input}`})
-      }
-    }
   }
 }
 </script>

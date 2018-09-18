@@ -1,7 +1,6 @@
 <template>
   <div>
-    <input type="text" v-bind:placeholder="placeholder"
-        class="place-order-form__from-address" 
+    <input type="text" v-bind:placeholder="placeholder" 
         v-model="value"
         ref="addressInput">
     <button v-on:click="emitCoords">ok</button>
@@ -44,8 +43,7 @@ export default {
       let lat = coords.geometry.location.lat()
       let lng = coords.geometry.location.lng()
       let address = coords.formatted_address
-      this.$emit('coords', [this.addressType, { coords: { lat: lat, lng: lng }, address: address }])
-      vueInstance.$router.go(-1)
+      this.$emit('coords', { coords: { lat: lat, lng: lng }, address: address })
     },
     async getCoords (placeId) {
       let geoCoder = new google.maps.Geocoder()
@@ -69,11 +67,6 @@ export default {
       this.autocomplete = this.getAutoCompleteObject(bounds)
     } catch(err) {
       console.error(err)
-    }
-  },
-  computed: {
-    addressType() {
-      return vueInstance.$route.path.split('/')[2]
     }
   }
 }
