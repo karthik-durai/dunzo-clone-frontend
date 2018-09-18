@@ -13,7 +13,8 @@ export default {
       map: null,
       lat: 12.9608311,
       lng: 76.64365539999994,
-      marker: null, 
+      marker: null,
+      intervalID: null
     }
   },
   methods: {
@@ -33,6 +34,22 @@ export default {
       this.map.setCenter({ lat: parseFloat(this.lat), lng: parseFloat(this.lng) })
       this.putMarker()
     },
+    electrifyMap () {
+      this.renderMap()
+      this.putMarker()
+      this.socket.emit('position request', this.orderId)
+      this.socket.on('runner position', (pos) => { 
+        console.log('runner position', pos)
+        this.lng = pos[1]
+        this.lat = pos[0]
+      })
+    },
+    checkForGoogle () {
+      if (google) { 
+        this.electrifyMap()
+        clearInterval(this.intervalID)
+      }
+    }
   },
   watch: {
     lat() {
@@ -43,14 +60,7 @@ export default {
     },
   },
   mounted() {
-    this.renderMap()
-    this.putMarker()
-    this.socket.emit('position request', this.orderId)
-    this.socket.on('runner position', (pos) => { 
-      console.log('runner position', pos)
-      this.lng = pos[1]
-      this.lat = pos[0]
-    })
+    this.intervalID = setInterval(this.checkForGoogle, 3000)
   }
 }
 </script>

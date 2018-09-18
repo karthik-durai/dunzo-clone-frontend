@@ -47,7 +47,6 @@ export default {
   methods: {
     async placeOrder() {
       let validatedResult = this.validateForm(this.orderDescription, this.pickUpLocation, this.dropLocation)
-      console.log(this.pickUpLocation, this.dropLocation)
       if (validatedResult) {
         let body = this.constructOrderBody(this.orderDescription, this.pickUpLocation, this.dropLocation)
         let postResult = await this.postOrder(body)

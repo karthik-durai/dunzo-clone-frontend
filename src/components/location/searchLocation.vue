@@ -11,11 +11,12 @@
 import vueInstance from '../../views/user/main.js'
 
 export default {
-  props: ['placeholder'],
   data() {
     return {
       value: '',
-      autocomplete: null
+      autocomplete: null,
+      intervalID: null,
+      placeholder: 'Enter a location'
     }
   },
   methods: {
@@ -57,10 +58,9 @@ export default {
           }
         )
       })
-    }
-  },
-  async mounted() {
-    try {
+    },
+    async createAutoComplete () {
+      try {
       let servingArea = {lat: 12.9833, lng: 77.5833}
       let servingRadius = 33000
       let bounds = this.createBounds(servingArea, servingRadius)
@@ -68,6 +68,16 @@ export default {
     } catch(err) {
       console.error(err)
     }
+    },
+    checkForGoogle () {
+      if (google) { 
+        this.createAutoComplete()
+        clearInterval(this.intervalID)
+      }
+    }
+  },
+  async mounted() {
+    this.intervalID = setInterval(this.checkForGoogle, 3000)
   }
 }
 </script>
