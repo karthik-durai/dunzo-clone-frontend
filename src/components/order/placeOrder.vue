@@ -2,56 +2,56 @@
   <div>
     <div class="place-order-form">
       <input type="text" v-model="orderDescription" 
-        v-bind:placeholder="descriptionPlaceholder"
-        class="place-order-form__description">
+        v-bind:placeholder="descriptionPlaceholder"/>
       <input-pick-up
         v-on:pickUpLocation="getPickUpLocation"/>
       <input-drop
         v-on:dropLocation="getDropLocation"/>
       <button v-on:click="placeOrder" class="place-order-form__submit">place</button>
     </div>
-    <information
-      v-bind:lessChars = "hasLessChars"
-      v-bind:failedToPlace = "hasFailedToPlace"
-      v-bind:inValidChars = "hasInvalidChars"
-      v-bind:placedSuccess = "hasPlaced"
-      />
+    <place-order-status
+      v-if="displayStatus" 
+      v-bind:status="placementStatus"/>
   </div>
 </template>
 
 <script>
-import information from '../status/placeOrderMessages/information.vue'
+import placeOrderStatus from '../status/placeOrderStatus.vue'
 import inputPickUp from '../location/inputPickUp.vue'
 import inputDrop from '../location/inputDrop.vue'
-import vueInstance from '../../views/user/main.js'
 
 export default {
   components: {
-    information,
     inputPickUp,
-    inputDrop
+    inputDrop,
+    placeOrderStatus
   },
   data() {
     return {
       orderDescription: '',
       descriptionPlaceholder: 'Type your order and click place',
-      hasLessChars: false,
-      hasFailedToPlace: false,
-      hasInvalidChars: false,
-      hasPlaced: false,
       postOrderUrl: 'http://localhost:8000/user/placeorder',
       pickUpLocation: {},
-      dropLocation: {}
+      dropLocation: {},
+      displayStatus: false,
+      placementStatus: [0, 0, 0]
     }
   },
   methods: {
     async placeOrder() {
       let validatedResult = this.validateForm(this.orderDescription, this.pickUpLocation, this.dropLocation)
-      if (validatedResult) {
+      if (!validatedResult) {
+        this.placementStatus = [1, 0, 0]
+        return
+      }
+      try {
         let body = this.constructOrderBody(this.orderDescription, this.pickUpLocation, this.dropLocation)
         let postResult = await this.postOrder(body)
-        console.log(postResult)
+        this.placementStatus = [0, 1, 0]
+      } catch(e) {
+        this.placementStatus = [0, 0, 1]
       }
+      this.displayStatus = true
     },
     async postOrder(body) {
       let status = (await (await fetch(this.postOrderUrl, this.constructFetchBody(body))).json()).status
