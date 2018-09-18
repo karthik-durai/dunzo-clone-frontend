@@ -1,6 +1,5 @@
 <template>
   <div>
-    <input type="number" v-model="lat">
     <div id="map" ref="map">
     </div>
   </div>
