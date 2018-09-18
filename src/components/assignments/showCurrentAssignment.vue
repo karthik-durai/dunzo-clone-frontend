@@ -1,16 +1,12 @@
 <template>
   <div> 
-    <router-link to="/showcurrentAssignment/menu">menu</router-link>
-    <router-view/>
     <div>
-      <div>
-        <p>Description: {{ order.description }}</p>
-        <p>Placed-on: {{ order.placedOn }}</p>
-        <p>Pickup: {{ order.fromAddr }}</p>
-        <p>Drop: {{ order.toAddr }}</p>
-      </div>
-      <button v-on:click="fulfillOrder">fulfill</button>
+      <p>Description: {{ order.description }}</p>
+      <p>Placed-on: {{ order.placedOn }}</p>
+      <p>Pickup: {{ order.fromAddr }}</p>
+      <p>Drop: {{ order.toAddr }}</p>
     </div>
+      <button v-on:click="fulfillOrder">fulfill</button>
   </div>
 </template>
 

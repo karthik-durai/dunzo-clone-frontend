@@ -6,6 +6,7 @@ import runnerMenu from '../../components/menu/runnerMenu.vue'
 import runnerProfile from '../../components/profile/runnerProfile.vue'
 import runnerLogin from '../../components/login/runnerLogin.vue'
 import about from '../../components/about/about.vue'
+// import runnerChat from '../../components/chats/runnerChat.vue'
 
 Vue.use(Router)
 
@@ -18,32 +19,24 @@ export default new Router({
     {
       path: '/showCurrentAssignment',
       component: showCurrentAssignment,
-      children: [
-        {
-          path: 'menu',
-          component: runnerMenu
-        }
-      ]
     },
+    // {
+    //   path: '/showCurrentAssignment/chat',
+    //   component: runnerChat,
+    //   children: [
+    //     {
+    //       path: 'menu',
+    //       component: runnerMenu
+    //     }
+    //   ]
+    // },
     {
       path: '/showPastAssignments',
       component: showPastAssignments,
-      children: [
-        {
-          path: 'menu',
-          component: runnerMenu
-        }
-      ]
     },
     {
       path: '/myProfile',
       component: runnerProfile,
-      children: [
-        {
-          path: 'menu',
-          component: runnerMenu
-        }
-      ]
     },
     {
       path: '/login',
@@ -52,12 +45,6 @@ export default new Router({
     {
       path: '/about',
       component: about,
-      children: [
-        {
-          path: 'menu',
-          component: runnerMenu
-        }
-      ]
     }
     // {
     //   path: '/about',

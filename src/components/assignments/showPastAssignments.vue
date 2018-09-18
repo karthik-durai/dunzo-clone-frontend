@@ -1,14 +1,10 @@
 <template>
   <div>
-    <router-link to="/showPastAssignments/menu">menu</router-link>
-    <router-view/>
-    <div>
-      <li v-for="order in orders">
-        <p>{{ order.status }}</p>
-        <p>{{ order.placedOn }}</p>
-        <p>{{ order.description }}</p>
-      </li>
-    </div>
+    <li v-for="order in orders">
+      <p>{{ order.status }}</p>
+      <p>{{ order.placedOn }}</p>
+      <p>{{ order.description }}</p>
+    </li>
   </div>
 </template>
 

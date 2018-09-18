@@ -1,12 +1,8 @@
 <template>
-  <div>
-    <router-link to="/myProfile/menu">menu</router-link>
-    <router-view/>
   <div class="profile">
-      <img v-bind:src="profile.profilePicture" alt="pic" class="profile__pic">
-      <p class="profile__name">{{ profile.name }}</p>
-      <p class="profile__emailID">{{ profile.emailID }}</p>
-  </div>
+    <img v-bind:src="profile.profilePicture" alt="pic" class="profile__pic">
+    <p class="profile__name">{{ profile.name }}</p>
+    <p class="profile__emailID">{{ profile.emailID }}</p>
   </div>
 </template>
 
