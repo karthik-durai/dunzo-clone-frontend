@@ -2,11 +2,10 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import showCurrentAssignment from '../../components/assignments/showCurrentAssignment.vue'
 import showPastAssignments from '../../components/assignments/showPastAssignments.vue'
-import runnerMenu from '../../components/menu/runnerMenu.vue'
 import runnerProfile from '../../components/profile/runnerProfile.vue'
 import runnerLogin from '../../components/login/runnerLogin.vue'
 import about from '../../components/about/about.vue'
-// import runnerChat from '../../components/chats/runnerChat.vue'
+import runnerChat from '../../components/chats/runnerChat.vue'
 
 Vue.use(Router)
 
@@ -20,16 +19,10 @@ export default new Router({
       path: '/showCurrentAssignment',
       component: showCurrentAssignment,
     },
-    // {
-    //   path: '/showCurrentAssignment/chat',
-    //   component: runnerChat,
-    //   children: [
-    //     {
-    //       path: 'menu',
-    //       component: runnerMenu
-    //     }
-    //   ]
-    // },
+    {
+      path: '/showCurrentAssignment/chat',
+      component: runnerChat,
+    },
     {
       path: '/showPastAssignments',
       component: showPastAssignments,

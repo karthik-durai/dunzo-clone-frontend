@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import vueInstance from '../../views/user/main.js'
+import vueInstance from '../../views/runner/main.js'
 import pastMessages from './pastMessages.vue'
 import currentMessages from './currentMessages.vue'
 
@@ -31,6 +31,7 @@ export default {
       this.currentChat.push({ from: 'you', message: this.message })
     },
     getPastMessages (messages) {
+      console.log('hello')
       this.pastChats = messages
     }
   },

@@ -2,7 +2,8 @@
   <div>
     <a href="" v-on:click.prevent="renderMenu">&#9776;</a>
     <runner-menu v-if="showMenu"/>
-    <router-view/>
+    <router-view
+      v-bind:socket="socket"/>
   </div>
 </template>
 
@@ -17,8 +18,12 @@ export default {
     return {
       lat: 0,
       lng: 0,
-      socket: io('http://localhost:8000'),
       showMenu: false
+    }
+  },
+  computed: {
+    socket() {
+      return io('http://localhost:8000')
     }
   },
   methods: {
