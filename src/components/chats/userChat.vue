@@ -27,7 +27,7 @@ export default {
   },
   methods: {
     sendMessage () {
-      this.socket.emit('chat message', [this.$route.params.id, this.message])
+      this.socket.emit('chat message', [this.$route.path.split('/')[2], this.message])
       this.currentChat.push({ from: 'you', message: this.message })
     },
     getPastMessages (messages) {
@@ -35,8 +35,9 @@ export default {
     }
   },
   mounted() {
-    this.socket.emit('join chat room', this.$route.params.id)
+    this.socket.emit('join chat room', this.$route.path.split('/')[2])
     this.socket.on('past messages', this.getPastMessages)
+    this.socket.on('chat message', (messageObj) => this.currentChat.push(messageObj))
   }
 }
 </script>
