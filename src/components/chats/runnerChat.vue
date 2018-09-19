@@ -33,8 +33,11 @@ export default {
       return order
     },
     sendMessage () {
-      this.socket.emit('chat message', [this.orderID, this.message])
-      this.currentChat.push({ from: 'you', message: this.message })
+      this.socket.emit(
+        'chat message',
+        [this.orderID, this.message],
+        (msgObj) => this.currentChat.push(msgObj)
+      )
     },
     getPastMessages (messages) {
       console.log('hello')

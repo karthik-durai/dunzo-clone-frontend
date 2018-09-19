@@ -27,8 +27,11 @@ export default {
   },
   methods: {
     sendMessage () {
-      this.socket.emit('chat message', [this.$route.path.split('/')[2], this.message])
-      this.currentChat.push({ from: 'you', message: this.message })
+      this.socket.emit(
+        'chat message',
+        [this.$route.path.split('/')[2], this.message],
+        (msgObj) => this.currentChat.push(msgObj)
+      )
     },
     getPastMessages (messages) {
       this.pastChats = messages
