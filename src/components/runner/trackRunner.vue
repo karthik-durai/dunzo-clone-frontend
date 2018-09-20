@@ -38,7 +38,7 @@ export default {
       this.renderMap()
       this.putMarker()
       this.socket.emit('position request', this.orderId)
-      this.socket.on('runner position', (pos) => { 
+      this.socket.on('runner position', (pos) => {
         console.log('runner position', pos)
         this.lng = pos[1]
         this.lat = pos[0]

@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import runner from './runner.vue'
 import showCurrentAssignment from '../../components/assignments/showCurrentAssignment.vue'
 import showPastAssignments from '../../components/assignments/showPastAssignments.vue'
 import runnerProfile from '../../components/profile/runnerProfile.vue'
@@ -12,32 +13,38 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
-      path: '/',
-      redirect: '/showCurrentAssignment'
-    },
-    {
-      path: '/showCurrentAssignment',
-      component: showCurrentAssignment,
-    },
-    {
-      path: '/showCurrentAssignment/chat',
-      component: runnerChat,
-    },
-    {
-      path: '/showPastAssignments',
-      component: showPastAssignments,
-    },
-    {
-      path: '/myProfile',
-      component: runnerProfile,
-    },
-    {
       path: '/login',
       component: runnerLogin
     },
     {
-      path: '/about',
-      component: about,
+      path: '/',
+      component: runner,
+      children: [
+        {
+          path: '/',
+          redirect: '/showCurrentAssignment'
+        },
+        {
+          path: '/showCurrentAssignment',
+          component: showCurrentAssignment,
+        },
+        {
+          path: '/showCurrentAssignment/chat',
+          component: runnerChat,
+        },
+        {
+          path: '/showPastAssignments',
+          component: showPastAssignments,
+        },
+        {
+          path: '/myProfile',
+          component: runnerProfile,
+        },
+        {
+          path: '/about',
+          component: about,
+        }
+      ]
     }
     // {
     //   path: '/about',

@@ -40,8 +40,8 @@ export default {
       )
     },
     getPastMessages (messages) {
-      console.log('hello')
       this.pastChats = messages
+      console.log(this.pastChats)
     }
   },
   async mounted() {

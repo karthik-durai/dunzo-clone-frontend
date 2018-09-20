@@ -1,7 +1,8 @@
 <template>
   <div>
     <a href="" v-on:click.prevent="renderMenu">&#9776;</a>
-    <runner-menu v-if="showMenu"/>
+    <runner-menu 
+      v-if="showMenu"/>
     <router-view
       v-bind:socket="socket"/>
   </div>
@@ -18,12 +19,11 @@ export default {
     return {
       lat: 0,
       lng: 0,
-      showMenu: false
-    }
-  },
-  computed: {
-    socket() {
-      return io('http://localhost:8000')
+      showMenu: false,
+      socket: '',
+      urlMapsAPI: 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCyrqmHGMWIf_a_EmXRsFi_3KWTr2koaBU&libraries=places',
+      urlSocketio: 'http://localhost:8000/socket.io/socket.io.js',
+      intervalId: null
     }
   },
   methods: {
@@ -35,11 +35,27 @@ export default {
         console.log(this.lat, this.lng)
       })
     },
+    loadScript (url) {
+      let script = document.createElement('script')
+      script.setAttribute('src', url)
+      script.setAttribute('async', true)
+      script.setAttribute('defer', true)
+      document.head.appendChild(script)
+    },
+    checkForSocket () {
+      if (io) {
+        this.socket = io('http://localhost:8000/')
+        clearInterval(this.intervalId)
+      }
+    },
     renderMenu () {
       this.showMenu = !this.showMenu
-    }
+    },
   },
   async mounted() {
+    this.loadScript(this.urlMapsAPI)
+    this.loadScript(this.urlSocketio)
+    this.intervalId = setInterval(this.checkForSocket, 3000)
     this.getCoordinates()
   },
 }

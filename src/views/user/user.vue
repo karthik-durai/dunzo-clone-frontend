@@ -21,7 +21,11 @@ export default {
     return {
       pickUpLocation: null, 
       dropLocation: null,
-      showMenu: false
+      showMenu: false,
+      socket: '',
+      urlMapsAPI: 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCyrqmHGMWIf_a_EmXRsFi_3KWTr2koaBU&libraries=places',
+      urlSocketio: 'http://localhost:8000/socket.io/socket.io.js',
+      intervalId: null
     }
   },
   methods: {
@@ -35,11 +39,54 @@ export default {
     },
     renderMenu () {
       this.showMenu = !this.showMenu
+    },
+    async getPublicVapidKey () {
+      let url = 'http://localhost:8000/publicVapidKey'
+      let publicVapidKey = (await (await fetch(url)).json())
+      return publicVapidKey
+    },
+    async initiateServiceWorker () {
+      try {
+        let registeredSW = await navigator.serviceWorker.register('userSW.js', { scope: '/' })
+        let subscriptionObj = await registeredSW.pushManager.subscribe({
+          userVisibleOnly: true,
+          applicationServerKey: await this.getPublicVapidKey()
+        })
+        return subscriptionObj
+      } catch (e) {
+        console.log(e)
+      }
+    },
+    async subscribePushNotification (subscriptionObj) {
+      await fetch('/subscribe', {
+        method: 'post',
+        body: JSON.stringify(subscriptionObj),
+        headers: {
+          'content-type': 'application/json'
+        }
+      })
+    },
+    loadScript (url) {
+      let script = document.createElement('script')
+      script.setAttribute('src', url)
+      script.setAttribute('async', true)
+      script.setAttribute('defer', true)
+      document.head.appendChild(script)
+    },
+    checkForSocket () {
+      if (io) {
+        this.socket = io('http://localhost:8000/')
+        clearInterval(this.intervalId)
+      }
     }
   },
-  computed: {
-    socket() {
-      return io('http://localhost:8000')
+  async mounted() {
+    this.loadScript(this.urlMapsAPI)
+    this.loadScript(this.urlSocketio)
+    this.intervalId = setInterval(this.checkForSocket, 3000)
+    if (navigator.serviceWorker) {
+      let subscriptionObj = await this.initiateServiceWorker()
+      this.subscribePushNotification(subscriptionObj)
     }
   }
 }

@@ -62,7 +62,7 @@ export default {
     async createAutoComplete () {
       try {
       let servingArea = {lat: 12.9833, lng: 77.5833}
-      let servingRadius = 33000
+      let servingRadius = 100000
       let bounds = this.createBounds(servingArea, servingRadius)
       this.autocomplete = this.getAutoCompleteObject(bounds)
     } catch(err) {
