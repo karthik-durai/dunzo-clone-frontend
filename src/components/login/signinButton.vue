@@ -16,18 +16,11 @@ export default {
 </script>
 
 <style scoped>
-  .signin-button {
-    flex: 1;
-    height: 10vh;
-  }
-  .signin-button__link {
-    display: block;
-  }
-  .signin-button__g-image {
-    width: 80%;
-    margin: 0 auto;
-    display: block;
-    box-shadow: 1px 1px 3px black;
-    padding: 0;
-  }
+.signin-button__link {
+  display: block;
+}
+.signin-button__g-image {
+  border: none;
+  width: 70vw;
+}
 </style>
