@@ -1,11 +1,14 @@
 <template>
   <div>
     <ol>
+      <p v-if="orders.length===0">No Orders founds</p>
       <li v-for="order of orders"
-          v-bind:key="order._id">
+          v-bind:key="order._id"
+          v-else>
         <orderList
         v-bind:order="order"
-        v-on:getdetails="changeRoute"/>
+        v-on:getdetails="changeRoute"
+        v-on:cancelorder="cancelOrder"/>
       </li>
     </ol>
   </div>
@@ -22,7 +25,8 @@ export default {
   data() {
     return {
       orders: [],
-      ordersUrl: 'http://localhost:8000/user/getorders'
+      ordersUrl: 'http://localhost:8000/user/getorders',
+      urlCancelOrder : 'http://localhost:8000/user/cancelorder'
     }
   },
   async mounted() {
@@ -42,7 +46,13 @@ export default {
           'authorization': document.cookie.split(';').map(e=>e.trim()).filter(e=>e.startsWith('access_token='))[0].substring(13)
         }
       }
-    }
+    },
+    async cancelOrder (orderID) {
+      let order = (await (await fetch(this.urlCancelOrder, {...this.constructBodyToFetch(),
+        method: 'post', 
+        body: JSON.stringify({orderID: orderID})})).json())
+      console.log(order)
+    },
   }
 }
 </script>

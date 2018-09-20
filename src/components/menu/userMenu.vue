@@ -34,6 +34,7 @@ export default {
   color: #ffffff;
   display: flex;
   flex-direction: column;
+        
 }
 
 .component-link {
