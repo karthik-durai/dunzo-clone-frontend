@@ -58,12 +58,19 @@ export default {
     },
     async initiateServiceWorker () {
       try {
-        let registeredSW = await navigator.serviceWorker.register('runnerSW.js', { scope: '/' })
-        let subscriptionObj = await registeredSW.pushManager.subscribe({
-          userVisibleOnly: true,
-          applicationServerKey: await this.getPublicVapidKey()
-        })
-        return subscriptionObj
+        let registeredSW = await navigator.serviceWorker.getRegistration()
+        if (!registeredSW) {
+          registeredSW = await navigator.serviceWorker.register('runnerSW.js', { scope: '/' })
+        }
+        let subscriptionObj = await registeredSW.pushManager.getSubscription()
+        let isNewSubscription = !subscriptionObj
+        if (!subscriptionObj) {
+          subscriptionObj = await registeredSW.pushManager.subscribe({
+            userVisibleOnly: true,
+            applicationServerKey: await this.getPublicVapidKey()
+          })
+        }
+        return isNewSubscription ? subscriptionObj : false
       } catch (e) {
         console.log(e)
       }
@@ -87,7 +94,9 @@ export default {
     this.getCoordinates()
     if (navigator.serviceWorker) {
       let subscriptionObj = await this.initiateServiceWorker()
-      this.subscribePushNotification(subscriptionObj)
+      if (subscriptionObj) {
+        this.subscribePushNotification(subscriptionObj)
+      }
     }
   },
 }
