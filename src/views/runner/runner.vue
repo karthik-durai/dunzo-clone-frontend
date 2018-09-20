@@ -51,12 +51,42 @@ export default {
     renderMenu () {
       this.showMenu = !this.showMenu
     },
+    async getPublicVapidKey () {
+      let url = 'http://localhost:8000/publicVapidKey'
+      let publicVapidKey = (await (await fetch(url)).json())
+      return publicVapidKey
+    },
+    async initiateServiceWorker () {
+      try {
+        let registeredSW = await navigator.serviceWorker.register('runnerSW.js', { scope: '/' })
+        let subscriptionObj = await registeredSW.pushManager.subscribe({
+          userVisibleOnly: true,
+          applicationServerKey: await this.getPublicVapidKey()
+        })
+        return subscriptionObj
+      } catch (e) {
+        console.log(e)
+      }
+    },
+    async subscribePushNotification (subscriptionObj) {
+      await fetch('/subscribe', {
+        method: 'post',
+        body: JSON.stringify(subscriptionObj),
+        headers: {
+          'content-type': 'application/json'
+        }
+      })
+    },
   },
   async mounted() {
     this.loadScript(this.urlMapsAPI)
     this.loadScript(this.urlSocketio)
     this.intervalId = setInterval(this.checkForSocket, 3000)
     this.getCoordinates()
+    if (navigator.serviceWorker) {
+      let subscriptionObj = await this.initiateServiceWorker()
+      this.subscribePushNotification(subscriptionObj)
+    }
   },
 }
 </script>

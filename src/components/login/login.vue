@@ -2,6 +2,7 @@
   <div class="login-component">
     <div class="heading">
       <h1 class="heading__h1">Dunzo-Clone</h1>
+      <h2>Hey, User</h2>
     </div>
     <p v-if="fetchingURL">loading</p>
     <a v-else v-bind:href="loginURL">sign in with google</a>
