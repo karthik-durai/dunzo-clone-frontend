@@ -69,11 +69,13 @@ export default {
       }
     },
     async subscribePushNotification (subscriptionObj) {
-      await fetch('/subscribe', {
+      await fetch('http://localhost:8000/subscribe', {
+        mode: 'cors',
         method: 'post',
         body: JSON.stringify(subscriptionObj),
         headers: {
-          'content-type': 'application/json'
+          'content-type': 'application/json',
+          'authorization': document.cookie.split(';').map(e=>e.trim()).filter(e=>e.startsWith('access_token='))[0].substring(13)
         }
       })
     },
