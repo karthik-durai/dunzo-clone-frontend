@@ -1,7 +1,8 @@
 <template>
   <div>
     <search-location
-      v-on:coords="getPickUpLocation"/>
+      v-on:coords="getPickUpLocation"
+      class="input-pickup"/>
   </div>
 </template>
 

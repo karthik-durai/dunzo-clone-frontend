@@ -1,8 +1,9 @@
 <template>
-  <div>
-    <a href="" v-on:click.prevent="renderMenu">&#9776;</a>
+  <div class="components-after-login">
+    <a href="" v-on:click.prevent="renderMenu" class="menu__hamburger-icon">&#9776;</a>
     <user-menu v-if="showMenu"/>
     <router-view
+    class="components"
     v-on:coords="getCoords"
     v-bind:pickUpLocation="pickUpLocation"
     v-bind:dropLocation="dropLocation"
@@ -104,5 +105,4 @@ export default {
 </script>
 
 <style>
-
 </style>

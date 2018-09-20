@@ -1,8 +1,9 @@
 <template>
-  <div>
+  <div class="address-input-block">
     <input type="text" v-bind:placeholder="placeholder" 
         v-model="value"
-        ref="addressInput">
+        ref="addressInput"
+        class="address-input-field">
   </div>
 </template>
 

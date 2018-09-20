@@ -1,17 +1,21 @@
 <template>
-  <div>
+  <div class="place-order-component">
     <div class="place-order-form">
       <input type="text" v-model="orderDescription" 
-        v-bind:placeholder="descriptionPlaceholder"/>
+        v-bind:placeholder="descriptionPlaceholder"
+        class="place-order-form__description"/>
       <input-pick-up
-        v-on:pickUpLocation="getPickUpLocation"/>
+        v-on:pickUpLocation="getPickUpLocation"
+        class="place-order-form__input-pickup"/>
       <input-drop
-        v-on:dropLocation="getDropLocation"/>
-      <button v-on:click="placeOrder" class="place-order-form__submit">place</button>
+        v-on:dropLocation="getDropLocation"
+        class="place-order-form__input-drop"/>
+      <button v-on:click="placeOrder" class="place-order-form__submitBtn">place</button>
     </div>
     <place-order-status
       v-if="displayStatus" 
-      v-bind:status="placementStatus"/>
+      v-bind:status="placementStatus"
+      class="place-order__status"/>
   </div>
 </template>
 

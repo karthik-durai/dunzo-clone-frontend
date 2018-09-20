@@ -2,15 +2,14 @@
   <div class="login-component">
     <div class="heading">
       <h1 class="heading__h1">Dunzo-Clone</h1>
-      <h2>Hey, Runner</h2>
+      <h2 class="heading__runner-greeting">Hey, Runner</h2>
     </div>
     <p v-if="fetchingURL">loading</p>
-    <a v-else v-bind:href="loginURL">Sign in with google</a>
-    <!-- <signin-button
+    <signin-button
       v-else
       v-bind:loginURL="loginURL"
       class="signin-button-block"
-    /> -->
+    />
   </div>
 </template>
 
@@ -49,5 +48,34 @@ export default {
 </script>
 
 <style>
-  
+.login-component {
+  height: inherit;
+  width: inherit;
+  display: grid;
+  grid-template-rows: repeat(2, 1fr);
+  color: #000000;
+}
+.heading {
+  display: flex;
+  flex-direction: column;
+  color: #000000;
+}
+.heading__h1 {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 2;
+  font-size: 10vw;
+}
+.heading__runner-greeting {
+  text-align: center;
+  flex: 1;
+  font-size: 7vw;
+}
+.signin-button-block {
+  display: flex;
+  justify-content: center;
+  padding-top: 2em;
+} 
 </style>

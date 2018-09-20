@@ -1,7 +1,8 @@
 <template>
   <div>
     <search-location
-      v-on:coords="getDropLocation"/>
+      v-on:coords="getDropLocation"
+      class="input-drop"/>
   </div>
 </template>
 
@@ -21,5 +22,4 @@ export default {
 </script>
 
 <style>
-
 </style>
