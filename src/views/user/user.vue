@@ -47,22 +47,31 @@ export default {
     },
     async initiateServiceWorker () {
       try {
-        let registeredSW = await navigator.serviceWorker.register('userSW.js', { scope: '/' })
-        let subscriptionObj = await registeredSW.pushManager.subscribe({
-          userVisibleOnly: true,
-          applicationServerKey: await this.getPublicVapidKey()
-        })
-        return subscriptionObj
+        let registeredSW = await navigator.serviceWorker.getRegistration()
+        if (!registeredSW) {
+          let registeredSW = await navigator.serviceWorker.register('userSW.js', { scope: '/' })
+        }
+        let subscriptionObj = await registeredSW.pushManager.getSubscription()
+        let isNewSubscription = !subscriptionObj
+        if (!subscriptionObj) {
+          subscriptionObj = await registeredSW.pushManager.subscribe({
+            userVisibleOnly: true,
+            applicationServerKey: await this.getPublicVapidKey()
+          })
+        }
+        return isNewSubscription ? subscriptionObj : false
       } catch (e) {
         console.log(e)
       }
     },
     async subscribePushNotification (subscriptionObj) {
-      await fetch('/subscribe', {
+      await fetch('http://localhost:8000/subscribe', {
+        mode: 'cors',
         method: 'post',
         body: JSON.stringify(subscriptionObj),
         headers: {
-          'content-type': 'application/json'
+          'content-type': 'application/json',
+          'authorization': document.cookie.split(';').map(e=>e.trim()).filter(e=>e.startsWith('access_token='))[0].substring(13)
         }
       })
     },
@@ -86,7 +95,9 @@ export default {
     this.intervalId = setInterval(this.checkForSocket, 3000)
     if (navigator.serviceWorker) {
       let subscriptionObj = await this.initiateServiceWorker()
-      this.subscribePushNotification(subscriptionObj)
+      if (subscriptionObj) {
+        this.subscribePushNotification(subscriptionObj)
+      }
     }
   }
 }
