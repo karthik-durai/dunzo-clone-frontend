@@ -1,8 +1,8 @@
 <template>
   <div>
-    <a href="" v-on:click.prevent="renderMenu" v-if="showHam" class="menu__hamburger-icon">&#9776;</a>
     <runner-menu 
       v-if="showMenu" v-on:hideMenu="hideMenu"/>
+    <a href="" v-on:click.prevent="renderMenu" class="menu__hamburger-icon">&#9776;</a>
     <router-view
       v-bind:socket="socket"/>
   </div>
@@ -29,8 +29,7 @@ export default {
   },
   methods: {
     hideMenu () {
-      this.showMenu = !this.showMenu
-      this.showHam = !this.showHam
+      this.showMenu = false;
     },
     getCoordinates () {
       navigator.geolocation.watchPosition(pos => {
@@ -54,8 +53,7 @@ export default {
       }
     },
     renderMenu () {
-      this.showMenu = !this.showMenu
-      this.showHam = !this.showHam
+      this.showMenu = true;
     },
     async getPublicVapidKey () {
       let url = 'http://localhost:8000/publicVapidKey'
@@ -109,9 +107,5 @@ export default {
 </script>
 
 <style>
-.menu-block {
-  position: fixed;
-  margin: 0;
-  border: solid;
-}
+
 </style>

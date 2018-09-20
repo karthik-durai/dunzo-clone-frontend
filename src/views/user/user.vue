@@ -1,7 +1,7 @@
 <template>
   <div class="components-after-login">
-    <a href="" v-on:click.prevent="renderMenu" v-if="showHam" class="menu__hamburger-icon">&#9776;</a>
     <user-menu v-if="showMenu" v-on:hideMenu="hideMenu"/>
+    <a href="" v-on:click.prevent="renderMenu" class="menu__hamburger-icon">&#9776;</a>
     <router-view
     class="components"
     v-on:coords="getCoords"
@@ -28,13 +28,11 @@ export default {
       urlSocketio: 'http://localhost:8000/socket.io/socket.io.js',
       intervalId: null,
       showSideBar: false,
-      showHam: true
     }
   },
   methods: {
     hideMenu () {
-      this.showMenu = !this.showMenu
-      this.showHam = !this.showHam
+      this.showMenu = false
     },
     getCoords (data) {
       console.log('got coordinates')
@@ -45,8 +43,7 @@ export default {
       }
     },
     renderMenu () {
-      this.showMenu = !this.showMenu
-      this.showHam = !this.showHam
+      this.showMenu = true
     },
     async getPublicVapidKey () {
       let url = 'http://localhost:8000/publicVapidKey'
@@ -112,9 +109,5 @@ export default {
 </script>
 
 <style>
-.menu-block {
-  position: fixed;
-  margin: 0;
-  border: solid;
-}
+
 </style>

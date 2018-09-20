@@ -1,12 +1,12 @@
 <template>
   <div class="menu-block" >
-    <menu class="user-menu">
-      <li class="close-menu"><span v-on:click="$emit('hideMenu')">X</span></li>
-      <li class="component-link"><router-link to="/">place order</router-link></li>
-      <li class="component-link"><router-link to="/showOrders">show my orders</router-link></li>
-      <li class="component-link"><router-link to="/myProfile">my profile</router-link></li>
-      <li class="component-link"><router-link to="/about">about</router-link></li>
-      <li class="component-link"><a href="http://localhost:8000/user/signout" role="button">sign out</a></li>
+    <menu class="user-menu" v-on:click="$emit('hideMenu')">
+      <li class="close-menu"><span v-on:click="$emit('hideMenu')">⬅</span></li>
+      <li class="component-link"><router-link to="/">Place order</router-link></li>
+      <li class="component-link"><router-link to="/showOrders">Show my orders</router-link></li>
+      <li class="component-link"><router-link to="/myProfile">My profile</router-link></li>
+      <li class="component-link"><router-link to="/about">About the app</router-link></li>
+      <li class="component-link"><a href="http://localhost:8000/user/signout" role="button">Sign out</a></li>
     </menu>
   </div>
 </template>
@@ -18,6 +18,12 @@ export default {
 </script>
 
 <style>
+.menu-block {
+  position: fixed;
+  margin: 0;
+  border: solid;
+}
+
 .user-menu {
   list-style: none;
   padding: 0;
@@ -31,8 +37,19 @@ export default {
 }
 
 .component-link {
-  text-decoration-style: none;
-  margin: 3em;
+  margin: 2em;
+}
+
+.component-link a {
+  text-decoration: none;
+}
+
+.close-menu span {
+  font-size: 2em;
+}
+
+.close-menu span, .component-link {
+  cursor: pointer;
 }
 
 .close-menu {
