@@ -1,7 +1,7 @@
 <template>
   <div class="components-after-login">
-    <a href="" v-on:click.prevent="renderMenu" class="menu__hamburger-icon">&#9776;</a>
-    <user-menu v-if="showMenu"/>
+    <a href="" v-on:click.prevent="renderMenu" v-if="showHam" class="menu__hamburger-icon">&#9776;</a>
+    <user-menu v-if="showMenu" v-on:hideMenu="hideMenu"/>
     <router-view
     class="components"
     v-on:coords="getCoords"
@@ -26,10 +26,16 @@ export default {
       socket: '',
       urlMapsAPI: 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCyrqmHGMWIf_a_EmXRsFi_3KWTr2koaBU&libraries=places',
       urlSocketio: 'http://localhost:8000/socket.io/socket.io.js',
-      intervalId: null
+      intervalId: null,
+      showSideBar: false,
+      showHam: true
     }
   },
   methods: {
+    hideMenu () {
+      this.showMenu = !this.showMenu
+      this.showHam = !this.showHam
+    },
     getCoords (data) {
       console.log('got coordinates')
       if (data[0] === 'provideDropAddress') {
@@ -40,6 +46,7 @@ export default {
     },
     renderMenu () {
       this.showMenu = !this.showMenu
+      this.showHam = !this.showHam
     },
     async getPublicVapidKey () {
       let url = 'http://localhost:8000/publicVapidKey'
@@ -105,4 +112,9 @@ export default {
 </script>
 
 <style>
+.menu-block {
+  position: fixed;
+  margin: 0;
+  border: solid;
+}
 </style>

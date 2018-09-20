@@ -1,8 +1,8 @@
 <template>
   <div>
-    <a href="" v-on:click.prevent="renderMenu">&#9776;</a>
+    <a href="" v-on:click.prevent="renderMenu" v-if="showHam" class="menu__hamburger-icon">&#9776;</a>
     <runner-menu 
-      v-if="showMenu"/>
+      v-if="showMenu" v-on:hideMenu="hideMenu"/>
     <router-view
       v-bind:socket="socket"/>
   </div>
@@ -23,10 +23,15 @@ export default {
       socket: '',
       urlMapsAPI: 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCyrqmHGMWIf_a_EmXRsFi_3KWTr2koaBU&libraries=places',
       urlSocketio: 'http://localhost:8000/socket.io/socket.io.js',
-      intervalId: null
+      intervalId: null,
+      showHam: true
     }
   },
   methods: {
+    hideMenu () {
+      this.showMenu = !this.showMenu
+      this.showHam = !this.showHam
+    },
     getCoordinates () {
       navigator.geolocation.watchPosition(pos => {
         this.lat = pos.coords.latitude
@@ -50,6 +55,7 @@ export default {
     },
     renderMenu () {
       this.showMenu = !this.showMenu
+      this.showHam = !this.showHam
     },
     async getPublicVapidKey () {
       let url = 'http://localhost:8000/publicVapidKey'
@@ -103,5 +109,9 @@ export default {
 </script>
 
 <style>
-
+.menu-block {
+  position: fixed;
+  margin: 0;
+  border: solid;
+}
 </style>

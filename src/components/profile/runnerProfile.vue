@@ -1,8 +1,11 @@
 <template>
   <div class="profile">
     <img v-bind:src="profile.profilePicture" alt="pic" class="profile__pic">
-    <p class="profile__name">{{ profile.name }}</p>
-    <p class="profile__emailID">{{ profile.emailID }}</p>
+    <p>Name: {{ profile.name }}</p>
+    <p>EmailId: {{ profile.emailID }}</p>
+    <p>First Signin: {{ profile.firstSignedIn }}</p>
+    <p>Recent Signin: {{ profile.recentSignedIn }}</p>
+    <p>Number of orders: {{ profile.pastOrders.length }}</p>
   </div>
 </template>
 
@@ -18,6 +21,7 @@ export default {
     async getMyProfile() {
       let fetchedObj = await fetch(this.profileUrl, this.constructFetchBody())
       let profile = await fetchedObj.json()
+      console.log(profile)
       return profile
     },
     constructFetchBody() {
