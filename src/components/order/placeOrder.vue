@@ -5,12 +5,10 @@
         v-bind:placeholder="descriptionPlaceholder"
         class="place-order-form__description"
         v-on:input="removeStatusMessage"/>
-      <input-pick-up
-        v-on:pickUpLocation="getPickUpLocation"
-        class="place-order-form__input-pickup"/>
-      <input-drop
-        v-on:dropLocation="getDropLocation"
-        class="place-order-form__input-drop"/>
+        <pick-up-location
+          v-on:coords="getPickUpLocation"/>
+        <drop-location
+          v-on:coords="getDropLocation"/>
       <button v-on:click="placeOrder" class="place-order-form__submitBtn"
         v-bind:disabled="disablePlaceBtn">place</button>
     </div>
@@ -23,14 +21,14 @@
 
 <script>
 import placeOrderStatus from '../status/placeOrderStatus.vue'
-import inputPickUp from '../location/inputPickUp.vue'
-import inputDrop from '../location/inputDrop.vue'
+import pickUpLocation from '../location/searchLocation.vue'
+import dropLocation from '../location/searchLocation.vue'
 
 export default {
   components: {
-    inputPickUp,
-    inputDrop,
-    placeOrderStatus
+    placeOrderStatus,
+    pickUpLocation,
+    dropLocation
   },
   data() {
     return {
@@ -41,6 +39,7 @@ export default {
       dropLocation: {},
       displayStatus: false,
       placementStatus: [0, 0, 0],
+      reset: false
     }
   },
   computed: {
@@ -66,6 +65,7 @@ export default {
         this.placementStatus = [0, 0, 1]
       }
       this.displayStatus = true
+      this.orderDescription = ''
     },
     async postOrder(body) {
       let status = (await (await fetch(this.postOrderUrl, this.constructFetchBody(body))).json()).status

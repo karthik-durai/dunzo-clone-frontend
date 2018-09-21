@@ -58,7 +58,7 @@ export default {
 .heading {
   display: flex;
   flex-direction: column;
-  color: #000000;
+  color: #ffffff;
 }
 .heading__h1 {
   margin: 0;

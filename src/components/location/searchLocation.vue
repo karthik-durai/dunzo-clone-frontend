@@ -13,10 +13,10 @@ import vueInstance from '../../views/user/main.js'
 export default {
   data() {
     return {
-      value: '',
       autocomplete: null,
       intervalID: null,
-      placeholder: 'Enter a location'
+      placeholder: 'Enter a location',
+      value: ''
     }
   },
   methods: {
