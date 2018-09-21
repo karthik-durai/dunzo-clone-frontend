@@ -111,7 +111,7 @@ export default {
 <style>
 
 .menu__hamburger-icon {
-  font-size: 5vh;
+  font-size: 10vw;
   text-decoration: none;
   color: #ffffff;
 }

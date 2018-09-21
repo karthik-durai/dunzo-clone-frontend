@@ -47,7 +47,7 @@ export default {
 }
 
 .close-menu span {
-  font-size: 2em;
+  font-size: 5em;
 }
 
 .close-menu span, .component-link {

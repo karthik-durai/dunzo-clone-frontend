@@ -34,7 +34,7 @@ export default {
       }
       let input = this.$refs.addressInput
       let autocomplete = new google.maps.places.Autocomplete(input, options)
-      // autocomplete.setBounds(bounds.getBounds())
+      autocomplete.setBounds(bounds.getBounds())
       autocomplete.addListener('place_changed', this.emitCoords)
       return autocomplete
     },
