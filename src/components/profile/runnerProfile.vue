@@ -13,7 +13,7 @@
 export default {
   data() {
     return {
-      profileUrl: 'http://localhost:8000/runner/profile',
+      profileUrl: 'https://dunzoclone.now.sh/runner/profile',
       profile: {}
     }
   },

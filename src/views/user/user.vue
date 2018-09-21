@@ -25,7 +25,7 @@ export default {
       showMenu: false,
       socket: '',
       urlMapsAPI: 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCyrqmHGMWIf_a_EmXRsFi_3KWTr2koaBU&libraries=places',
-      urlSocketio: 'http://localhost:8000/socket.io/socket.io.js',
+      urlSocketio: 'https://dunzoclone.now.sh/socket.io/socket.io.js',
       intervalId: null,
       showSideBar: false,
     }
@@ -46,7 +46,7 @@ export default {
       this.showMenu = true
     },
     async getPublicVapidKey () {
-      let url = 'http://localhost:8000/publicVapidKey'
+      let url = 'https://dunzoclone.now.sh/publicVapidKey'
       let publicVapidKey = (await (await fetch(url)).json())
       return publicVapidKey
     },
@@ -70,7 +70,7 @@ export default {
       }
     },
     async subscribePushNotification (subscriptionObj) {
-      await fetch('http://localhost:8000/subscribe', {
+      await fetch('https://dunzoclone.now.sh/subscribe', {
         mode: 'cors',
         method: 'post',
         body: JSON.stringify(subscriptionObj),
@@ -89,7 +89,7 @@ export default {
     },
     checkForSocket () {
       if (io) {
-        this.socket = io('http://localhost:8000/')
+        this.socket = io('https://dunzoclone.now.sh/')
         clearInterval(this.intervalId)
       }
     }

@@ -22,7 +22,7 @@ export default {
   data() {
     return {
       orderDetails: {},
-      orderDetailsUrl: 'http://localhost:8000/user/getOrderDetails?orderID='
+      orderDetailsUrl: 'https://dunzoclone.now.sh/user/getOrderDetails?orderID='
     }
   },
   computed: {

@@ -19,7 +19,7 @@ export default {
   },
   data() {
     return {
-      getProfileUrl: 'http://localhost:8000/user/profile',
+      getProfileUrl: 'https://dunzoclone.now.sh/user/profile',
       profile: {}
     }
   },

@@ -34,7 +34,7 @@ export default {
     return {
       orderDescription: '',
       descriptionPlaceholder: 'Type your order',
-      postOrderUrl: 'http://localhost:8000/user/placeorder',
+      postOrderUrl: 'https://dunzoclone.now.sh/user/placeorder',
       pickUpLocation: {},
       dropLocation: {},
       displayStatus: false,

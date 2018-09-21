@@ -59,7 +59,7 @@ export default {
   },
   async mounted() {
     const currentOrder = await (await fetch(
-      'http://localhost:8000/runner/currentOrder',
+      'https://dunzoclone.now.sh/runner/currentOrder',
       {
         mode: 'cors',
         headers: {

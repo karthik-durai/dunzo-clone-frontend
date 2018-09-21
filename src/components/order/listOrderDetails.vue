@@ -17,7 +17,7 @@ export default {
   props: ['order'],
   data() {
     return {
-      urlCancelOrder: 'http://localhost:8000/user/cancelorder'
+      urlCancelOrder: 'https://dunzoclone.now.sh/user/cancelorder'
     }
   },
   computed: {

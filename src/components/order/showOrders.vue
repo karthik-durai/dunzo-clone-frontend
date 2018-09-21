@@ -26,8 +26,8 @@ export default {
   data() {
     return {
       orders: [],
-      ordersUrl: 'http://localhost:8000/user/getorders',
-      urlCancelOrder : 'http://localhost:8000/user/cancelorder'
+      ordersUrl: 'https://dunzoclone.now.sh/user/getorders',
+      urlCancelOrder : 'https://dunzoclone.now.sh/user/cancelorder'
     }
   },
   async mounted() {

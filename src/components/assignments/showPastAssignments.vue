@@ -12,7 +12,7 @@
 export default {
   data() {
     return {
-      pastOrderUrl: 'http://localhost:8000/runner/pastOrders',
+      pastOrderUrl: 'https://dunzoclone.now.sh/runner/pastOrders',
       orders: null
     }
   },

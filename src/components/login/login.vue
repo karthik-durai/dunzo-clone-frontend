@@ -29,7 +29,7 @@ export default {
   methods: {
     async getLoginURL() {
       try {
-        let fetchedObj =  await fetch('http://localhost:8000/user/getLoginURL')
+        let fetchedObj =  await fetch('https://dunzoclone.now.sh/user/getLoginURL')
         let url = (await fetchedObj.json()).url
         return url
       } catch (err) {

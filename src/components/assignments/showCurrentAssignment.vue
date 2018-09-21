@@ -22,8 +22,8 @@ export default {
   },
   data() {
     return {
-      currentOrderUrl: 'http://localhost:8000/runner/currentOrder',
-      fulfillOrderUrl: 'http://localhost:8000/runner/fulfillorder',
+      currentOrderUrl: 'https://dunzoclone.now.sh/runner/currentOrder',
+      fulfillOrderUrl: 'https://dunzoclone.now.sh/runner/fulfillorder',
       order: {},
     }
   },

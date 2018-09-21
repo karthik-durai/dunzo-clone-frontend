@@ -6,7 +6,7 @@
       <li class="component-link"><router-link to="/showOrders">Show my orders</router-link></li>
       <li class="component-link"><router-link to="/myProfile">My profile</router-link></li>
       <!-- <li class="component-link"><router-link to="/about">About the app</router-link></li> -->
-      <li class="component-link"><a href="http://localhost:8000/user/signout" role="button">Sign out</a></li>
+      <li class="component-link"><a href="https://dunzoclone.now.sh/user/signout" role="button">Sign out</a></li>
     </menu>
   </div>
 </template>
