@@ -38,6 +38,7 @@ export default {
     constructBodyToFetch() {
       return {
         headers: {
+          'content-type': 'application/json',
           'authorization': document.cookie.split(';').map(e=>e.trim()).filter(e=>e.startsWith('access_token='))[0].substring(13)
         },
         method: 'post', 

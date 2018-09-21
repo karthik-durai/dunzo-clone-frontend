@@ -132,7 +132,9 @@ export default {
 }
 
 .place-order-form__submitBtn {
-  font-size: 5em;
-  border: solid 5px;
+  font-size: 3em;
+  /* border: solid 5px; */
+  color: #000000;
+  box-shadow: 1px 1px 5px #ffffff, -1px -1px 5px #ffffff;
 }
 </style>

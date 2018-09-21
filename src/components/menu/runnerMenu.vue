@@ -5,7 +5,7 @@
       <li class="component-link"><router-link to="/showCurrentAssignment">Current Assignment</router-link></li>
       <li class="component-link"><router-link to="/showPastAssignments">Past Assignments</router-link></li>
       <li class="component-link"><router-link to="/myProfile">My Profile</router-link></li>
-      <li class="component-link"><router-link to="/about">About the app</router-link></li>
+      <!-- <li class="component-link"><router-link to="/about">About the app</router-link></li> -->
       <li class="component-link"><a href="http://localhost:8000/runner/signout" role="button">Sign out</a></li>
     </menu>
   </div>

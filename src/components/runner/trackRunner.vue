@@ -67,12 +67,13 @@ export default {
 
 <style>
 .tracker-map {
-  width: 500px;
+  width: 100vw;
   height: 500px;
 }
 
 #map {
   height: inherit;
+  margin: 0 auto;
 }
 
 </style>

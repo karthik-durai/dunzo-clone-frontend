@@ -1,7 +1,7 @@
 <template>
   <div class="orders-list-block">
     <ol class="order-list">
-      <p v-if="orders.length===0">No Orders founds</p>
+      <p v-if="orders.length===0">No Orders found</p>
       <li v-for="order of orders"
           v-bind:key="order._id"
           v-else>
@@ -44,6 +44,7 @@ export default {
     constructBodyToFetch() {
       return {
         headers: {
+          'content-type': 'application/json',
           'authorization': document.cookie.split(';').map(e=>e.trim()).filter(e=>e.startsWith('access_token='))[0].substring(13)
         }
       }
@@ -66,6 +67,7 @@ export default {
 .order-list {
   list-style: none;
   padding-left: 0;
+  text-align: center;
 }
 
 </style>
