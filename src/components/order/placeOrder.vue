@@ -3,7 +3,8 @@
     <div class="place-order-form">
       <input type="text" v-model="orderDescription" 
         v-bind:placeholder="descriptionPlaceholder"
-        class="place-order-form__description"/>
+        class="place-order-form__description"
+        v-on:input="removeStatusMessage"/>
       <input-pick-up
         v-on:pickUpLocation="getPickUpLocation"
         class="place-order-form__input-pickup"/>
@@ -39,7 +40,7 @@ export default {
       pickUpLocation: {},
       dropLocation: {},
       displayStatus: false,
-      placementStatus: [0, 0, 0]
+      placementStatus: [0, 0, 0],
     }
   },
   computed: {
@@ -48,6 +49,9 @@ export default {
     }
   },
   methods: {
+    removeStatusMessage() {
+      this.displayStatus = false
+    },
     async placeOrder() {
       let validatedResult = this.validateForm(this.orderDescription, this.pickUpLocation, this.dropLocation)
       if (!validatedResult) {  
@@ -99,7 +103,7 @@ export default {
         body: JSON.stringify(body)
       }
     },
-  }
+  },
 }
 </script>
 

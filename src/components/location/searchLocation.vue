@@ -84,9 +84,6 @@ export default {
 </script>
 
 <style>
-.address-input-block {
-
-}
 .address-input-field {
   height: 10vh;
   width: 100%;
