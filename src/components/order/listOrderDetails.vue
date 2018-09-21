@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="order-details-block">
     <p>{{ order.status }}</p>
     <p>{{ order.description }}</p>
     <p>Placed-On: {{ order.placedOn }}</p>
@@ -7,7 +7,8 @@
     <p>Pickup: {{ order.fromAddr }}</p>
     <p>Drop: {{ order.toAddr }}</p>
     <p>Runner: {{ runner }}</p>
-    <button v-on:click="cancelOrder">cancel</button>
+    <button v-on:click="cancelOrder" v-bind:disabled="disabledCancelBtn">cancel</button>
+    <button v-on:click="goToChat" v-bind:disabled="disabledChat">chat with runner</button>
   </div>
 </template>
 
@@ -24,6 +25,14 @@ export default {
       if (this.order.runner) return this.order.runner.name
       return 'not assigned'
     },
+    disabledChat() {
+      if (this.order.status === 'assigned' || this.order.status === 'fulfilled') return false
+      return true
+    },
+    disabledCancelBtn() {
+      if (this.order.status === 'assigned') return false
+      return true
+    }
   },
   methods: {
     constructBodyToFetch() {
@@ -38,11 +47,19 @@ export default {
     async cancelOrder () {
       let order = (await (await fetch(this.urlCancelOrder, this.constructBodyToFetch())).json())
       console.log(order)
+    },
+    goToChat () {
+      this.$router.push(`${this.$route.path}/chat`)
     }
   }
 }
 </script>
 
 <style>
+.order-details-block {
+  color: #ffffff;
+  text-align: center;
+  font-size: 6vw;
+}
 
 </style>

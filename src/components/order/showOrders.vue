@@ -1,11 +1,12 @@
 <template>
-  <div>
-    <ol>
+  <div class="orders-list-block">
+    <ol class="order-list">
       <p v-if="orders.length===0">No Orders founds</p>
       <li v-for="order of orders"
           v-bind:key="order._id"
           v-else>
         <orderList
+        class="each-order"
         v-bind:order="order"
         v-on:getdetails="changeRoute"
         v-on:cancelorder="cancelOrder"/>
@@ -58,5 +59,13 @@ export default {
 </script>
 
 <style>
+.orders-list-block {
+  color: #ffffff;
+}
+
+.order-list {
+  list-style: none;
+  padding-left: 0;
+}
 
 </style>

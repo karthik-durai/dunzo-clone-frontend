@@ -20,7 +20,7 @@ export default {
   height: inherit;
   margin: 0;
   /* background-image: url('../../assets/low-contrast-linen.png'); */
-  /* background-image: url('../../assets/green-dust-and-scratches.png');
-  background-color: #000000; */
+  background-image: url('../../assets/green-dust-and-scratches.png');
+  background-color: #000000;
 }
 </style>

@@ -1,12 +1,10 @@
 <template>
-  <div class="order-details">
+  <div>
     <list-order-details
-      v-bind:order="orderDetails"
-      class="each-order"/>
+      v-bind:order="orderDetails"/>
     <track-runner
       v-bind:orderId="orderId"
-      v-bind:socket="socket"
-      class="tracker-map"/>
+      v-bind:socket="socket"/>
   </div>
 </template>
 
@@ -58,22 +56,5 @@ export default {
 </script>
 
 <style>
-.order-details {
-  height: inherit;
-  display: flex;
-  flex-direction: column;
-}
-
-.each-order {
-  flex: 1;
-}
-
-.tracker-map>div {
-  width: 300px;
-  height: 300px;
-  flex: 2;
-  border: solid;
-  position: relative
-}
 
 </style>

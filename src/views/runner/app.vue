@@ -22,5 +22,6 @@ export default {
   /* background-image: url('../../assets/low-contrast-linen.png'); */
   /* background-image: url('../../assets/green-dust-and-scratches.png');
   background-color: #000000; */
+    background: linear-gradient(to right, #c31432, #240b36);
 }
 </style>

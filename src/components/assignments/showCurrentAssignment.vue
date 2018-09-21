@@ -1,12 +1,14 @@
 <template>
-  <div> 
-    <div>
+  <div class="current-assignment-details">
+    <p v-if="!order.description">No Assignments</p> 
+    <div v-else>
       <p>Description: {{ order.description }}</p>
       <p>Placed-on: {{ order.placedOn }}</p>
       <p>Pickup: {{ order.fromAddr }}</p>
       <p>Drop: {{ order.toAddr }}</p>
+      <button v-on:click="goToChat">Chat with user</button>
     </div>
-      <button v-on:click="fulfillOrder">fulfill</button>
+      <button v-if="order.description" v-on:click="fulfillOrder">fulfill</button>
   </div>
 </template>
 
@@ -26,6 +28,9 @@ export default {
     }
   },
   methods: {
+    goToChat() {
+      this.$router.push(`${this.$route.path}/chat`)
+    },
     async getCurrentAssignments () {
       let fetchedObj = await fetch(this.currentOrderUrl, this.constructFetchBody())
       let order = await fetchedObj.json()
@@ -54,5 +59,9 @@ export default {
 </script>
 
 <style>
+.current-assignment-details {
+  text-align: center;
+  color: #ffffff;
+}
 
 </style>

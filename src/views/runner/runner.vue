@@ -107,5 +107,10 @@ export default {
 </script>
 
 <style>
+.menu__hamburger-icon {
+  font-size: 5vh;
+  text-decoration: none;
+  color: #ffffff;
+}
 
 </style>

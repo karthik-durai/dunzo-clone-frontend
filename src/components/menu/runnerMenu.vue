@@ -42,6 +42,7 @@ export default {
 
 .component-link a {
   text-decoration: none;
+  font-size: 3em;
 }
 
 .close-menu span {

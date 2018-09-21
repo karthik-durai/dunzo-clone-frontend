@@ -1,8 +1,8 @@
 <template>
-  <div>
-    <li v-for="order in orders">
+  <div class="past-assignment-details">
+    <li v-for="order in orders" class="each-assignment">
       <p>{{ order.status }}</p>
-      <p>{{ order.placedOn }}</p>
+      <p>placed On: {{ order.placedOn }}</p>
       <p>{{ order.description }}</p>
     </li>
   </div>
@@ -38,5 +38,14 @@ export default {
 </script>
 
 <style>
+.past-assignment-details {
+  text-align: center;
+  color: #ffffff;
+}
+.each-assignment {
+  border: solid #ffffff;
+  margin: 1em;
+  list-style: none;
+}
 
 </style>

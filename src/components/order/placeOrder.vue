@@ -10,7 +10,8 @@
       <input-drop
         v-on:dropLocation="getDropLocation"
         class="place-order-form__input-drop"/>
-      <button v-on:click="placeOrder" class="place-order-form__submitBtn">place</button>
+      <button v-on:click="placeOrder" class="place-order-form__submitBtn"
+        v-bind:disabled="disablePlaceBtn">place</button>
     </div>
     <place-order-status
       v-if="displayStatus" 
@@ -33,7 +34,7 @@ export default {
   data() {
     return {
       orderDescription: '',
-      descriptionPlaceholder: 'Type your order and click place',
+      descriptionPlaceholder: 'Type your order',
       postOrderUrl: 'http://localhost:8000/user/placeorder',
       pickUpLocation: {},
       dropLocation: {},
@@ -41,10 +42,15 @@ export default {
       placementStatus: [0, 0, 0]
     }
   },
+  computed: {
+    disablePlaceBtn() {
+      return this.validateForm(this.orderDescription, this.pickUpLocation, this.dropLocation)
+    }
+  },
   methods: {
     async placeOrder() {
       let validatedResult = this.validateForm(this.orderDescription, this.pickUpLocation, this.dropLocation)
-      if (!validatedResult) {
+      if (!validatedResult) {  
         this.placementStatus = [1, 0, 0]
         return
       }
@@ -98,4 +104,35 @@ export default {
 </script>
 
 <style>
+.place-order-component {
+  display: grid;
+  grid-template-rows: 80vh auto;
+  margin-top: 1em;
+}
+.place-order-form {
+  display: grid;
+  grid-template-rows: repeat(4, auto);
+  padding: 0 2em 0 2em;
+}
+.place-order-form__description {
+  height: 50%;
+  border: solid 5px;
+}
+
+.place-order-form__description::placeholder {
+  text-align: center;
+}
+
+.place-order-form__description[type="text"] {
+  font-size: 3em;
+}
+
+.place-order__status {
+  text-align: center;
+}
+
+.place-order-form__submitBtn {
+  font-size: 5em;
+  border: solid 5px;
+}
 </style>

@@ -40,6 +40,11 @@ export default {
 </script>
 
 <style>
+.profile {
+  text-align: center;
+  color: #ffffff;
+  font-size: 6vw;
+}
 .profile__pic {
   width: 50px;
 }

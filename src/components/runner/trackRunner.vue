@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="tracker-map">
     <div id="map" ref="map">
     </div>
   </div>
@@ -66,9 +66,13 @@ export default {
 </script>
 
 <style>
-#map {
+.tracker-map {
   width: 500px;
   height: 500px;
+}
+
+#map {
+  height: inherit;
 }
 
 </style>

@@ -34,7 +34,7 @@ export default {
       }
       let input = this.$refs.addressInput
       let autocomplete = new google.maps.places.Autocomplete(input, options)
-      autocomplete.setBounds(bounds.getBounds())
+      // autocomplete.setBounds(bounds.getBounds())
       autocomplete.addListener('place_changed', this.emitCoords)
       return autocomplete
     },
@@ -84,5 +84,17 @@ export default {
 </script>
 
 <style>
+.address-input-block {
 
+}
+.address-input-field {
+  height: 10vh;
+  width: 100%;
+  border: solid 5px;
+}
+
+.address-input-field[type="text"] {
+  font-size: 3em;
+  text-align: center;
+}
 </style>

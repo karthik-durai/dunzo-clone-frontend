@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="status-messages">
     <p v-if="invalidForm">order form is incomplete, make sure order description is more than 10 characters and both addresses are filled</p>
     <p v-else-if="placed">order has been placed successfully</p>
     <p v-else-if="notPlaced">order did not get placed successfully, try again</p>
@@ -24,5 +24,8 @@ export default {
 </script>
 
 <style>
+.status-messages {
+  color: #ffffff;
+}
 
 </style>
