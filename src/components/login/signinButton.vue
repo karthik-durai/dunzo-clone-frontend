@@ -17,10 +17,10 @@ export default {
 
 <style scoped>
 .signin-button__link {
-  display: block;
+  display: flex;
 }
 .signin-button__g-image {
   border: none;
-  width: 70vw;
+  width: 100%;
 }
 </style>

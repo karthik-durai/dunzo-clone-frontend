@@ -50,35 +50,33 @@ export default {
 
 <style>
 .login-component {
-  height: inherit;
+  border: solid;
   width: inherit;
-  display: grid;
-  grid-template-rows: repeat(2, 1fr);
-  color: #000000;
-}
-.heading {
   display: flex;
   flex-direction: column;
-  color: #ffffff;
+  height: 100%;
 }
+
+.heading {
+  flex: 1;
+}
+
 .heading__h1 {
-  margin: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex: 2;
-  font-size: 10vw;
+  text-align: center;
+  height: 50%;
+  border: solid yellow;
 }
+
 .heading__user-greeting {
   text-align: center;
-  flex: 1;
-  font-size: 7vw;
+  height: 50%;
+  border: solid green;
 }
+
 .signin-button-block {
-  display: flex;
-  justify-content: center;
-  padding-top: 2em;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  flex: 1;
 }
-
-
 </style>
