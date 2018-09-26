@@ -61,16 +61,29 @@ export default {
   flex: 1;
 }
 
-.heading__h1 {
-  text-align: center;
+.heading__user-greeting, .heading__h1, .signin-button-block {
   height: 50%;
-  border: solid yellow;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* color: #333333; */
+}
+
+.heading__h1 {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 5em;
+  font-weight: 200;
+  color: #FCFBE3;
+  text-shadow: 1px 1px 1px #FBB829,
+                2px 2px 1px #FBB829,
+                3px 3px 1px #FBB829;
 }
 
 .heading__user-greeting {
-  text-align: center;
-  height: 50%;
-  border: solid green;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 3em;
+  font-weight: lighter;
+  color: #FCFBE3;
 }
 
 .signin-button-block {
