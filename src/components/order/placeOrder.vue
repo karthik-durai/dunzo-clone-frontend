@@ -1,16 +1,22 @@
 <template>
   <div class="place-order-component">
     <div class="place-order-form">
-      <input type="text" v-model="orderDescription" 
-        v-bind:placeholder="descriptionPlaceholder"
-        class="place-order-form__description"
-        v-on:input="removeStatusMessage"/>
+      <div class="place-order-form__description">
+        <input type="text" v-model="orderDescription" 
+          v-bind:placeholder="descriptionPlaceholder"
+          v-on:input="removeStatusMessage"
+          class="place-order-form__input"/>
+        </div>
         <pick-up-location
-          v-on:coords="getPickUpLocation"/>
+          v-on:coords="getPickUpLocation"
+          v-bind:placeholder="pickupPlaceholder"/>
         <drop-location
-          v-on:coords="getDropLocation"/>
-      <button v-on:click="placeOrder" class="place-order-form__submitBtn"
-        v-bind:disabled="disablePlaceBtn">place</button>
+          v-on:coords="getDropLocation"
+          v-bind:placeholder="dropPlaceholder"/>
+        <div class="place-order-form__submitBlock">
+          <button v-on:click="placeOrder"
+            class="place-order-form__submitBtn">place</button>
+        </div>
     </div>
     <place-order-status
       v-if="displayStatus" 
@@ -39,7 +45,9 @@ export default {
       dropLocation: {},
       displayStatus: false,
       placementStatus: [0, 0, 0],
-      reset: false
+      reset: false,
+      pickupPlaceholder: 'Enter Pickup location',
+      dropPlaceholder: 'Enter Drop location'
     }
   },
   computed: {
@@ -109,36 +117,42 @@ export default {
 
 <style>
 .place-order-component {
-  display: grid;
-  grid-template-rows: 80vh auto;
-  margin-top: 1em;
+  display: flex;
+  width: 90%;
+  margin: auto;
 }
 .place-order-form {
-  display: grid;
-  grid-template-rows: repeat(4, auto);
-  padding: 0 2em 0 2em;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: auto;
+  width: 100%;
 }
-.place-order-form__description {
-  height: 50%;
-  border: solid 5px;
+.place-order-form__description, .address-input-block, .place-order-form__submitBlock {
+  width: 100%;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.place-order-form__description::placeholder {
-  text-align: center;
-}
-
-.place-order-form__description[type="text"] {
+.place-order-form__input {
+  width: 95%;
+  height: 40%;
   font-size: 3em;
+}
+
+.place-order-form__input::placeholder {
+  text-align: center;
 }
 
 .place-order__status {
-  text-align: center;
+  flex: 1;
 }
 
 .place-order-form__submitBtn {
+  width: 95%;
   font-size: 3em;
-  /* border: solid 5px; */
-  color: #000000;
-  box-shadow: 1px 1px 5px #ffffff, -1px -1px 5px #ffffff;
 }
 </style>

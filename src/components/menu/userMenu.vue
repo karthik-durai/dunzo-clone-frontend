@@ -20,41 +20,34 @@ export default {
 <style>
 .menu-block {
   position: fixed;
-  margin: 0;
-  border: solid;
+  height: 100%;
+  background-color: black;
 }
 
 .user-menu {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  background-color: black;
-  height: 100vh;
-  width: 50vw;
-  color: #ffffff;
   display: flex;
   flex-direction: column;
-        
+  list-style: none;
 }
 
 .component-link {
   margin: 2em;
 }
-
 .component-link a {
   text-decoration: none;
   font-size: 3em;
+  color: white;
+  outline: 0;
 }
-
 .close-menu span {
   font-size: 5em;
 }
-
 .close-menu span, .component-link {
   cursor: pointer;
 }
-
 .close-menu {
   text-align: end;
+  color: white;
 }
+
 </style>

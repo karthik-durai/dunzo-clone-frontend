@@ -3,7 +3,7 @@
     <user-menu v-if="showMenu" v-on:hideMenu="hideMenu"/>
     <a href="" v-on:click.prevent="renderMenu" class="menu__hamburger-icon">&#9776;</a>
     <router-view
-    class="components"
+    class="component"
     v-on:coords="getCoords"
     v-bind:pickUpLocation="pickUpLocation"
     v-bind:dropLocation="dropLocation"
@@ -109,4 +109,22 @@ export default {
 </script>
 
 <style>
+.components-after-login {
+  height: inherit;
+  width: inherit;
+}
+
+.menu__hamburger-icon {
+  height: 5%;
+  display: block;
+  font-size: 3em;
+  padding-left: 0.5em;
+  text-decoration: none;
+  color: white;
+  outline: 0;
+}
+
+.component {
+  height: 95%;
+}
 </style>

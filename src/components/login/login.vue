@@ -84,6 +84,7 @@ export default {
   font-size: 3em;
   font-weight: lighter;
   color: #FCFBE3;
+  /* color: linear-gradient(to right, #c31432, #240b36); */
 }
 
 .signin-button-block {
@@ -92,4 +93,6 @@ export default {
   margin-right: auto;
   flex: 1;
 }
+
+
 </style>

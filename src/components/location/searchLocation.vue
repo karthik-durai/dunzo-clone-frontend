@@ -11,6 +11,7 @@
 import vueInstance from '../../views/user/main.js'
 
 export default {
+  props: ['placeholder'],
   data() {
     return {
       autocomplete: null,
@@ -85,13 +86,13 @@ export default {
 
 <style>
 .address-input-field {
-  height: 10vh;
-  width: 100%;
-  border: solid 5px;
+  width: 95%;
+  height: 40%;
+  font-size: 3em;
 }
 
-.address-input-field[type="text"] {
-  font-size: 3em;
+.address-input-field::placeholder {
+  font-size: 1em;
   text-align: center;
 }
 </style>

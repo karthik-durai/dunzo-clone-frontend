@@ -1,5 +1,5 @@
 <template>
-  <div class="signin-button">
+  <div>
     <a v-bind:href="loginURL" class="signin-button__link">
       <img src="../../assets/btn_google_signin_light_normal_web@2x.png" 
             alt="sign in with google"
@@ -17,7 +17,7 @@ export default {
 
 <style scoped>
 .signin-button__link {
-  display: flex;
+  display: block;
 }
 .signin-button__g-image {
   border: none;
