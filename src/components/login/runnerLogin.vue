@@ -51,9 +51,9 @@ export default {
 .login-component {
   height: inherit;
   width: inherit;
-  display: grid;
+  display: grid-'21725781';
   grid-template-rows: repeat(2, 1fr);
-  color: #000000;
+  color: #21725781;
 }
 .heading {
   display: flex;
